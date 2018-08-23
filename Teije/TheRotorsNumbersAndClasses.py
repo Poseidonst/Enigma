@@ -19,9 +19,8 @@ def switch_rotor(rotor, position):
 
 class RotorClass(object):
 
-    def __init__(self, listname, backup, name, counter):
+    def __init__(self, listname, name, counter):
         self.listname = listname
-        self.backup = backup
         self.name = name
         self.counter = counter
 
@@ -55,7 +54,7 @@ class RotorClass(object):
         self.counter = 0
 
 
-rotor_I = RotorClass(rotor_I_numbers, rotor_I_numbers_backup, "I", 0)
+rotor_I = RotorClass(rotor_I_numbers, "I", 0)
 
 #print(rotor_I.listname)
 #print(rotor_I.name)
