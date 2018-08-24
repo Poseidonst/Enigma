@@ -4,17 +4,6 @@ alphabet_dict = {chr(65+i) : i for i in range(26)}
 rotor_I_numbers = [alphabet_dict[i] for i in "EKMFLGDQVZNTOWYHXUSPAIBRCJ"]
 rotor_II_numbers = [alphabet_dict[i] for i in "AJDKSIRUXBLHWTMCQGZNPYFVOE"]
 rotor_III_numbers = [alphabet_dict[i] for i in "BDFHJLCPRTXVZNYEIWGAKMUSQO"]
-def make_letters():
-    rotor = []
-    for i in rotor_I_numbers:
-        rotor.append(alphabet_list[i])
-    print(rotor)
-    print(rotor[alphabet_dict["A"]])
-
-def switch_rotor(rotor, position):
-    for i in range(0, position):
-        rotor += [rotor.pop(0)]
-    return (rotor)
 
 
 class RotorClass(object):
@@ -57,18 +46,30 @@ class RotorClass(object):
             self.listname += [self.listname.pop(0)]
         self.position = 0
 
-rotor_I = RotorClass(rotor_I_numbers, "I", 1, 7)
+def get_difference(rotor1, rotor2):
+    difference = rotor2.position - rotor1.position
+    return(difference)
 
-#print(rotor_I.listname)
-#print(rotor_I.name)
-#print(rotor_I.switch(1))
-print(rotor_I.position)
-print(rotor_I.defswitch(1))
-print(rotor_I.position)
-print(rotor_I.defswitch(1))
-print(rotor_I.position)
-rotor_I.reset()
-print(rotor_I.position)
-print(rotor_I.defswitch(1))
-print(rotor_I.position)
-#print(rotor_I.get_position())
+def enigma():
+    userinput = "AAAAA"              #str(input("Give a letter: ")).upper()
+    userinputlist = [i for i in userinput]
+    codedlist = []
+    userrotor1 = 0
+    userrotor2 = 1
+    for i in userinputlist:
+        rotorI.defswitch(userrotor1)
+        rotorII.defswitch(userrotor2)
+        i = alphabet_dict[i]
+        diff = get_difference(rotorI, rotorII)
+        i = rotorI.listname[i]
+        i += diff
+        i = rotorII.listname[i - rotorII.position]
+        codedlist.append(alphabet_list[i])
+        userrotor1 += 1
+    for i in codedlist:
+        print(i, end = "")
+
+
+rotorI = RotorClass(rotor_I_numbers, "I", 0, 7)
+rotorII = RotorClass(rotor_II_numbers, "II", 0, 8)
+enigma()
