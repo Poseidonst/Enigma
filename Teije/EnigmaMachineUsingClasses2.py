@@ -4,6 +4,7 @@ alphabet_dict = {chr(65+i) : i for i in range(26)}
 rotor_I_numbers = [alphabet_dict[i] for i in "EKMFLGDQVZNTOWYHXUSPAIBRCJ"]
 rotor_II_numbers = [alphabet_dict[i] for i in "AJDKSIRUXBLHWTMCQGZNPYFVOE"]
 rotor_III_numbers = [alphabet_dict[i] for i in "BDFHJLCPRTXVZNYEIWGAKMUSQO"]
+reflector_B_numbers = [alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJAT"]
 
 
 class RotorClass(object):
@@ -53,6 +54,12 @@ class RotorClass(object):
             self.listname += [self.listname.pop(0)]
         self.position = 0
 
+    def reverse(self, reverselist):
+        for i in alphabet_list:
+            for j in self.listname:
+                if i == alphabet_list[j]:
+                    reverselist.append(alphabet_list[self.listname.index(j)])
+
 def get_difference(rotor1, rotor2):
     difference = rotor2.position - rotor1.position
     return(difference)
@@ -63,40 +70,6 @@ def switch_rotors(rotor1, rotor2, rotor3):
         rotor2.switch1()
     if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
         rotor3.switch1()
-
-
-def rotor1_set(rotor1, rotor2, inputlist, manipulate_list):
-    codedlist = []
-    for i in inputlist:
-        i = alphabet_dict[i]                            #Turns letter into number
-        diff = get_difference(rotor1, rotor2)           #Gets the difference between two rotors and where they are relative to eachother
-        i = rotor1.listname[i]                          #Makes variable i go through rotor1
-        i += diff                                       #Adds the difference to i so it goes at the good spot through rotor2
-        i = rotor2.listname[i - rotor2.position]        #i goes through rotor2
-        manipulate_list.append(alphabet_list[i])        #Makes a list of all the new outcomes
-        rotor1.switch1()                                #Rotor1 switches to next position
-        if rotor1.position == rotor1.rotortip:          #If the position of rotor1 is at the turnover-point rotor2 will go to the next position
-            rotor2.switch1()
-
-def firstrotor_set(rotor1, rotor2, rotor3, inputlist, manipulate_list):
-    for i in inputlist:
-        i = alphabet_dict[i]
-        diff = get_difference(rotor1, rotor2)
-        i = rotor1.listname[i]
-        i += diff
-        i = i - rotor2.position
-        manipulate_list.append(alphabet_list[i])
-        switch_rotors(rotor1, rotor2, rotor3)
-
-def secondrotor_set(rotor1, rotor2, rotor3, inputlist, manipulate_list):
-    for i in inputlist:
-        i = alphabet_dict[i]
-        i = rotor2.listname[i]
-        diff = get_difference(rotor2, rotor3)
-        i += diff
-        i = i - rotor3.position
-        manipulate_list.append(alphabet_list[i])
-        switch_rotors(rotor1, rotor2, rotor3)
 
 def enigma(userinput, rotor1, rotor2, rotor3, rotorsetting1, rotorsetting2, rotorsetting3):             #userinput is the text to code, rotorsetting1 is the rotorposition of first rotor, and rotorsetting2 for the second rotor
     userinputlist = [i for i in userinput]
@@ -115,19 +88,27 @@ def enigma(userinput, rotor1, rotor2, rotor3, rotorsetting1, rotorsetting2, roto
 
         diff = get_difference(rotor2, rotor3)
         i += diff
-        i = rotor2.listname[i - rotor3.position]
+        i = rotor3.listname[i - rotor3.position]
 
-
-
+        i = reflectorB.listname[i - rotor3.position]
 
         codedlist.append(alphabet_list[i])
         switch_rotors(rotor1, rotor2, rotor3)
 
-
     return("".join(codedlist))
 
 rotorI = RotorClass(rotor_I_numbers, "I", 0, 1)
-rotorII = RotorClass(rotor_II_numbers, "II", 0, 2)
+rotorII = RotorClass(rotor_II_numbers, "II", 0, 1)
 rotorIII = RotorClass(rotor_III_numbers, "III", 0, 9)
+reflectorB = RotorClass(reflector_B_numbers, "B", 0, 0)
+reversedI = []
+reversedII = []
+reversedIII = []
+rotorI.reverse(reversedI)
+rotorII.reverse(reversedII)
+rotorIII.reverse(reversedIII)
+rotorI_reversed = RotorClass(reversedI, "I Reversed", 0, 1)
+rotorII_reversed = RotorClass(reversedII, "II Reversed", 0, 9)
+rotorIII_reversed = RotorClass(reversedIII, "III Reversed", 0, 0)
 
-print(enigma("A" * 10000000, rotorI, rotorII, rotorIII, 0, 0, 0))
+print(enigma("A" * 100, rotorI, rotorII, rotorIII, 0, 0, 0))
