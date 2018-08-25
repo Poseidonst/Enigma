@@ -57,11 +57,12 @@ def get_difference(rotor1, rotor2):
     difference = rotor2.position - rotor1.position
     return(difference)
 
-def enigma(userinput, userrotor1, userrotor2):             #userinput is the text to code, userrotor1 is the rotorposition of first rotor, and userrotor2 for the second rotor
+def enigma(userinput, userrotor1, userrotor2, userrotor3):             #userinput is the text to code, userrotor1 is the rotorposition of first rotor, and userrotor2 for the second rotor
     userinputlist = [i for i in userinput]
     codedlist = []
     rotorI.defswitch(userrotor1)
     rotorII.defswitch(userrotor2)
+    rotorIII.defswitch(userrotor3)
     for i in userinputlist:
         i = alphabet_dict[i]
         diff = get_difference(rotorI, rotorII)
@@ -76,7 +77,8 @@ def enigma(userinput, userrotor1, userrotor2):             #userinput is the tex
 
 rotorI = RotorClass(rotor_I_numbers, "I", 0, 7)
 rotorII = RotorClass(rotor_II_numbers, "II", 0, 8)
+rotorIII = RotorClass(rotor_III_numbers, "III", 0, 9)
 
 for i in range(0, 25):
     for j in range(0, 25):
-        print(enigma("AAAAA", i, j))
+        print(enigma("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", i, j, 0))
