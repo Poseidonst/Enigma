@@ -13,7 +13,6 @@ rotor_III = {key : value for key, value in zip(alphabet_list, rotor_III_list)}
 rotor_III_back = {key : value for key, value in zip(rotor_III_list, alphabet_list)}
 reflector_B = {key : value for key, value in zip(alphabet_list, reflector_B_list)}
 
-print(rotor_I_back)
 def make_message(message, start1, start2, start3):
     I = alphabet_dict[start1]
     II = alphabet_dict[start2]
