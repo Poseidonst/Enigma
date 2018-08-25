@@ -51,7 +51,7 @@ class RotorClass(object):
         places = 26 - self.position
         for i in range(0, places):
             self.listname += [self.listname.pop(0)]
-        self.position = 0
+        self.position = 0 #RotorClass
 
 def get_difference(rotor1, rotor2):
     difference = rotor2.position - rotor1.position
