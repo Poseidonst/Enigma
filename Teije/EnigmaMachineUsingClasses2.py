@@ -61,7 +61,7 @@ def switch_rotors(rotor1, rotor2, rotor3):
     rotor1.switch1()
     if rotor1.position == rotor1.rotortip:
         rotor2.switch1()
-    if rotor2.position == rotor2.rotortip:
+    if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
         rotor3.switch1()
 
 
@@ -101,33 +101,33 @@ def secondrotor_set(rotor1, rotor2, rotor3, inputlist, manipulate_list):
 def enigma(userinput, rotor1, rotor2, rotor3, rotorsetting1, rotorsetting2, rotorsetting3):             #userinput is the text to code, rotorsetting1 is the rotorposition of first rotor, and rotorsetting2 for the second rotor
     userinputlist = [i for i in userinput]
     codedlist = []
-    coded2list = []
-    coded3list = []
-    rotor1.defswitch(rotorsetting1)
-    rotor2.defswitch(rotorsetting2)
-    firstrotor_set(rotor1, rotor2, rotor3, userinputlist, codedlist)
-    rotor1.reset()
-    rotor2.reset()
     rotor1.defswitch(rotorsetting1)
     rotor2.defswitch(rotorsetting2)
     rotor3.defswitch(rotorsetting3)
-    secondrotor_set(rotor1, rotor2, rotor3, codedlist, coded2list)
-    rotor1.reset()
-    rotor2.reset()
-    rotor3.reset()
-    rotor1.defswitch(rotorsetting1)
-    rotor2.defswitch(rotorsetting2)
-    rotor3.defswitch(rotorsetting3)
-    for i in coded2list:
+    for i in userinputlist:
+
         i = alphabet_dict[i]
-        i = rotor3.listname[i]
+        i = rotor1.listname[i]
+
+        diff = get_difference(rotor1, rotor2)
+        i += diff
+        i = rotor2.listname[i - rotor2.position]
+
+        diff = get_difference(rotor2, rotor3)
+        i += diff
+        i = rotor2.listname[i - rotor3.position]
+
+
+
+
+        codedlist.append(alphabet_list[i])
         switch_rotors(rotor1, rotor2, rotor3)
-        coded3list.append(alphabet_list[i])
 
-    return("".join(coded3list))
 
-rotorI = RotorClass(rotor_I_numbers, "I", 0, 2)
-rotorII = RotorClass(rotor_II_numbers, "II", 0, 1)
+    return("".join(codedlist))
+
+rotorI = RotorClass(rotor_I_numbers, "I", 0, 1)
+rotorII = RotorClass(rotor_II_numbers, "II", 0, 2)
 rotorIII = RotorClass(rotor_III_numbers, "III", 0, 9)
 
-print(enigma("A" * 52, rotorI, rotorII, rotorIII, 0, 0, 0))
+print(enigma("A" * 10000000, rotorI, rotorII, rotorIII, 0, 0, 0))
