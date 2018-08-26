@@ -90,7 +90,10 @@ def decipher(text, guess):
     else:
         print("Unable to decipher, try another guess")
 
-
+for i in range(26):
+    for j in range(26):
+        for k in range(26):
+            print(make_message("A" * 100, alphabet_list[i], alphabet_list[j], alphabet_list[k]))
 print(make_message("struggleofthebetrayedpeopleagainstitsdefraudersthatisintherepressionoftheantisemiticmovementRespectfullyAdolfHitler", "Q", "F", "Q"))
 #decipher("XDXHPDZUCMPJYVRNTZNWQOHHEYSETOZKXYFXIXALYOXGINWCUHBGAOHGZHTXHQURZLEQAOCLMOTIJYBUXOHFOISTYISSKUNXOYFJSWQUEJFCIJQUFHG", "hitler")
 
