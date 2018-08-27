@@ -1,4 +1,5 @@
 list_alphabet = [i for i in "abcdefghijklmnopqrstuvwxyz"]
+# test voor slicing: print (list_alphabet[0:2:1])
 
 list_rotor_I = [i for i in "ekmflgdqvzntowyhxuspaibrcj"]
 list_rotor_II = [i for i in "ajdksiruxblhwtmcqgznpyfvoe"]
@@ -6,6 +7,10 @@ list_rotor_III = [i for i in "bdfhjlcprtxvznyeiwgakmusqo"]
 
 list_reflector_B = [i for i in "yruhqsldpxngokmiebfzcwvjat"]
 list_reflector_C = [i for i in "fvpjiaoyedrzxwgctkuqsbnmhl"]
+
+count = 0
+count += 1
+print count
 
 dictionary_B = { "a":"y",
                  "b":"r",
@@ -82,4 +87,7 @@ schakelbord = {"a":"a",
 for key in schakelbord:
     if input == key:
         heen_enter_rotorI = schakelbord[key]
-        print(heen_enter_rotorI)
+        print(heen_enter_rotorI)\
+
+woord = ["H", "E", "Y"]
+print (woord[0:1:1])
