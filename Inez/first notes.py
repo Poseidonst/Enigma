@@ -10,7 +10,7 @@ list_reflector_C = [i for i in "fvpjiaoyedrzxwgctkuqsbnmhl"]
 
 count = 0
 count += 1
-print count
+
 
 dictionary_B = { "a":"y",
                  "b":"r",
