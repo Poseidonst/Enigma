@@ -147,5 +147,5 @@ reflectorB = ReflectorClass(reflector_B_list, "B")
 #            print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
 
 
-print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, 10, 25, 25))
-print(enigma("CRUGMXZRTSSGWJXWGZFCNUXEFUJKOBKDWRYZEVNJXFMJOUWUJYYBMWMXLRNNCBRKRLRLLSYKSEMJBQGZTOBGFTXDVUZZFRUIUDXZ", rotorI, rotorII, rotorIII, reflectorB, 10, 25, 25))
+print(enigma("HALLOJISSE", rotorII, rotorI, rotorIII, reflectorB, 10, 25, 25))
+print(enigma("PGHAMWFEDB", rotorII, rotorI, rotorIII, reflectorB, 10, 25, 25))
