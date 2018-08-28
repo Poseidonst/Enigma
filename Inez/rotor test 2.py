@@ -1,20 +1,23 @@
 list_rotor_I = [i for i in "ekmflgdqvzntowyhxuspaibrcj"]
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-count_I = 28
+count_I = 2
 if count_I < 0:
     count_I += 26
 elif count_I > 26:
     count_I -= 26
 
-count_II = 1
+count_II = 0
 if count_II < 0:
     count_II += 26
 elif count_II > 26:
     count_II -= 26
 
-heen_enter_rotorI = "a"
-nummer_enter_rotorI = alphabet.find(heen_enter_rotorI) + count_I
+heen_rotorI = "f"
+
+nummer_enter_rotorI = alphabet.find(heen_rotorI) + count_I
+print (alphabet.find(heen_rotorI))
+print (nummer_enter_rotorI)
 if nummer_enter_rotorI < 0:
     nummer_enter_rotorI += 26
 elif nummer_enter_rotorI > 26:
@@ -49,12 +52,10 @@ rotor_I ={ "a":"e",
            "y":"c",
            "z":"j" }
 
-for key in rotor_I:
-    if rotor_I_in == key:
-        rotor_I_uit = rotor_I[key]
-        print (rotor_I_uit)
+rotor_I_uit = alphabet[alphabet.find(rotor_I[rotor_I_in]) - count_I]
 
 num_rotII_in = alphabet.find(rotor_I_uit) - count_II
 rotor_II_in = alphabet[num_rotII_in]
 print (rotor_II_in)
+
 count_I += 1
