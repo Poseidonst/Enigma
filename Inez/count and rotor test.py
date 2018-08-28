@@ -20,6 +20,6 @@ for key in rotor_I:
         count_I += 1
 count_II = 0
 
-#list_alphabet.find(str(rotor_I[key])) - count_I = nummer_if_II_A
-#uitkomst_if_II_A = list_alphabet[nummer_if_II_A]
-#heen_enter_rotorII = list_alphabet.find(nummer_if_II_A - count_II)
+nummer_if_II_A = list_alphabet.find(str(rotor_I[key])) - count_I
+uitkomst_if_II_A = list_alphabet[nummer_if_II_A]
+heen_enter_rotorII = list_alphabet.find(nummer_if_II_A - count_II)
