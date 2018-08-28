@@ -97,7 +97,7 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
     for i in userinputlist:
 
-        i = plugboard(i, plugdiction)                       #Through plugboard
+        # i = plugboard(i, plugdiction)                       #Through plugboard
 
         i = alphabet_dict[i]                                #From touchpress through rotor 1
         i = rotor1.listname[i]
@@ -125,7 +125,7 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
         i = i - rotor1.position                             #From rotor 1 back through the output
 
         i = alphabet_list[i]                                #Through plugboard
-        i = plugboard(i, plugdiction)
+        # i = plugboard(i, plugdiction)
 
         codedlist.append(i)
         switch_rotors(rotor1, rotor2, rotor3)
