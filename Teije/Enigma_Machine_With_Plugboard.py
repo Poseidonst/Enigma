@@ -88,7 +88,7 @@ def plugboard(input, plugdict):
 
 def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3):             #userinput is the text to code, rotorsetting1 is the rotorposition of first rotor, and rotorsetting2 for the second rotor
 
-    userinputlist = [i for i in userinput]
+    userinputlist = [i.upper() for i in userinput]
     codedlist = []
 
     rotor1.defswitch(rotorsetting1)
@@ -97,7 +97,7 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
     for i in userinputlist:
 
-        # i = plugboard(i, plugdiction)                       #Through plugboard
+        i = plugboard(i, plugdiction)                       #Through plugboard
 
         i = alphabet_dict[i]                                #From touchpress through rotor 1
         i = rotor1.listname[i]
@@ -125,7 +125,7 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
         i = i - rotor1.position                             #From rotor 1 back through the output
 
         i = alphabet_list[i]                                #Through plugboard
-        # i = plugboard(i, plugdiction)
+        i = plugboard(i, plugdiction)
 
         codedlist.append(i)
         switch_rotors(rotor1, rotor2, rotor3)
@@ -141,13 +141,13 @@ rotorII = RotorClass(rotor_II_list, rotorII_reversed_list, "Rotor II", 0, 5)
 rotorIII = RotorClass(rotor_III_list, rotorIII_reversed_list, "Rotor III", 0, 22)
 reflectorB = ReflectorClass(reflector_B_list, "B")
 
-count = 0
-for i in range(26):
-   for j in range(26):
-       for k in range(26):
-           print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
-           count += 1
-print(count)
+# count = 0
+# for i in range(26):
+#    for j in range(26):
+#        for k in range(26):
+#            print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
+#            count += 1
+# print(count)
 
-print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, 11, 25, 25))
-print(enigma("RUGMXZRTSSGWJXWGZFCNUXEFUJKOBKDWRYZEVNJXFMJOUWUJYYBMWMXLRNNCBRKRLRLLSYKSEMJBQGZTOBGFTXDVUZZFRUIUDXZN", rotorI, rotorII, rotorIII, reflectorB, 11, 25, 25))
+print(enigma("WFQIQFWQBXKFKWKVWU", rotorI, rotorII, rotorIII, reflectorB, 19, 5, 12))
+print(enigma("LYPGCZDFKUKIVCTFZGRJDPUDSBYNUBYFPTZUXSWCTFSGSNYFBVYDULJBKPMIGSGTJPGOQXBITJNIUEZFSUQECEGOMZZUCRVIPMZK", rotorI, rotorII, rotorIII, reflectorB, 11, 25, 25))
