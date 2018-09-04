@@ -56,7 +56,7 @@ rotor_II ={"a":"a",
            "z":"e" }
 
 list_rotor_III = [i for i in "bdfhjlcprtxvznyeiwgakmusqo"]
-rotor_II ={"a":"b",
+rotor_III ={"a":"b",
            "b":"d",
            "c":"f",
            "d":"h",

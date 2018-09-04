@@ -1,25 +1,24 @@
-
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-count_I = 0
+count_I = int(input("Instelling rotorI: "))
 if count_I < 0:
     count_I += 26
 elif count_I > 26:
     count_I -= 26
 
-count_II = 0
+count_II = int(input("Instelling rotorII: "))
 if count_II < 0:
     count_II += 26
 elif count_II > 26:
     count_II -= 26
 
-count_III = 0
+count_III = int(input("Instelling rotorIII: "))
 if count_III < 0:
     count_III += 26
 elif count_III > 26:
     count_III -= 26
 
-heen_rotorI = "a"
+heen_rotorI = input("Geef een letter:")
 
 num_enter_rotorI = alphabet.find(heen_rotorI) + count_I
 print (alphabet.find(heen_rotorI))
