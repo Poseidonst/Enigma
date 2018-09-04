@@ -1,30 +1,22 @@
-inputlist = []
+def RatioCheck(filename):
+    inputlist = []
 
-with open("TextInputDocs.txt", "r") as j:
-    inputlist.append(j.read())
+    with open(filename, "r") as reader:
+        inputlist.append(reader.read())
 
-input = "".join(inputlist)
+    inputsent = "".join(inputlist).lower()
 
-def RatioCheck(inputsent):
-
-    inputsent = inputsent.lower()
-    inputsentlist = inputsent.split(" ")
-    inputsent = "".join(inputsentlist)
-
-    klinkercount = 0
-    medeklinkercount = 0
+    klcount = 0
+    medklcount = 0
 
     for i in inputsent:
         if i.islower():
             if i in "aeoui":
-                klinkercount += 1
+                klcount += 1
             else:
-                medeklinkercount += 1
+                medklcount += 1
 
-    print("The klinker/mederklinker ratio from textfile")
-    print(klinkercount / medeklinkercount)
-
-
+    print("De Klinker/Medeklinker verhouding in '%s' is %s" %(filename, klcount/medklcount))
 
 if __name__ == "__main__":
-    RatioCheck(input)
+    RatioCheck("TextInputDocs.txt")
