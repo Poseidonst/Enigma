@@ -32,3 +32,6 @@ for key in dictionary_B:
   if enters_ref_heen == key:
     exit_ref_heen = dictionary_B[key] #gaat weer terug de derde rotor in
     print (exit_ref_heen)
+
+Reverse_B = {val:key for (key, val) in dictionary_B.items()}
+# print(Reverse_B) note for reversing dictionaries
