@@ -35,9 +35,6 @@ class RotorClass(object):
         self.rotortip = rotortip
         self.revlistname = revlistname
 
-    def __repr__(self):
-        return(str(self.listname))
-
     def defswitch(self, places):
         while places < 0:               #This way it works with negative list as well
             places = places + 26
@@ -77,7 +74,8 @@ def switch_rotors(rotor1, rotor2, rotor3):
     if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
         rotor3.switch1()
 
-plugdiction = {"A" : "Z", "Z" : "A", "B" : "T", "T" : "B"}
+plugdiction = {"A" : "Z", "Z" : "A",
+               "B" : "T", "T" : "B"}
 
 def plugboard(input, plugdict):
     if input in plugdict:
