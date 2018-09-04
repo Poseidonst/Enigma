@@ -15,7 +15,7 @@ if count_III < 0:
     count_III += 26
 elif count_III > 25:
     count_III -= 26
-
+output = ""
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 woord = input("Insert tekst: ")
 for i in woord:
@@ -52,15 +52,18 @@ for i in woord:
                "x":"r",
                "y":"c",
                "z":"j" }
-
-    i = alphabet[alphabet.find(rotor_I[i]) - count_I]
+    ni = alphabet.find(rotor_I[i]) - count_I
+    while ni < 0:
+        ni += 26
+    while ni > 25:
+        ni -= 26
+    i = alphabet[ni]
     ni = alphabet.find(i) - count_II
     while ni < 0:
         ni += 26
     while ni > 25:
         ni -= 26
     i = alphabet[ni]
-
     ni = ni + count_II
     while ni < 0:
         ni += 26
@@ -198,6 +201,13 @@ for i in woord:
         ni -= 26
     i = alphabet[ni]
     terug_I = {val:key for (key, val) in rotor_I.items()}
-    i = alphabet[(alphabet.find(terug_I[i]) - count_I)]
-    print (i)
+    ni = alphabet.find(terug_I[i]) - count_I
+    while ni < 0:
+        ni += 26
+    while ni > 25:
+        ni -= 26
+    i = alphabet[ni]
+    output += str(i)
     count_I += 1
+
+print (output)
