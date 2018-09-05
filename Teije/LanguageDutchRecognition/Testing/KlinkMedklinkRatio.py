@@ -1,10 +1,7 @@
 def RatioCheck(*args):
     try:
-        inputlist = []
-        with open((*args), "r") as reader:
-            inputlist.append(reader.read())
-
-        inputsent = "".join(inputlist).lower()
+        with open(filename, "r") as reader:
+            inputsent = reader.read()
     except:
         inputsent = str(args).lower()
 

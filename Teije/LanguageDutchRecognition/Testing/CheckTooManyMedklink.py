@@ -1,11 +1,8 @@
 def CheckMedklink(*args):
     points = 0
     try:
-        inputlist = []
-        with open((*args), "r") as reader:
-            inputlist.append(reader.read())
-
-        inputsent = "".join(inputlist).lower()
+        with open(filename, "r") as reader:
+            inputsent = reader.read()
     except:
         inputsent = str(args).lower()
 
@@ -25,7 +22,7 @@ def CheckMedklink(*args):
             counter += 1
 
     ratio = counter/len(inputsent)
-
+    print(ratio)
     if ratio < 0.01:
         points += 30
     else:

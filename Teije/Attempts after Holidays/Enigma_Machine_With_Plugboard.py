@@ -1,5 +1,3 @@
-import LanguageRecognitionProgram
-
 alphabet_list = [i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 alphabet_dict = {chr(65+i) : i for i in range(26)}
 
@@ -36,9 +34,6 @@ class RotorClass(object):
         self.position = position
         self.rotortip = rotortip
         self.revlistname = revlistname
-
-    def __repr__(self):
-        return(str(self.listname))
 
     def defswitch(self, places):
         while places < 0:               #This way it works with negative list as well
@@ -79,9 +74,19 @@ def switch_rotors(rotor1, rotor2, rotor3):
     if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
         rotor3.switch1()
 
+plugdiction = {"A" : "Z", "Z" : "A",
+               "B" : "T", "T" : "B"}
+
+def plugboard(input, plugdict):
+    if input in plugdict:
+        output = plugdict[input]
+    else:
+        output = input
+    return(output)
+
 def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3):             #userinput is the text to code, rotorsetting1 is the rotorposition of first rotor, and rotorsetting2 for the second rotor
 
-    userinputlist = [i for i in userinput]
+    userinputlist = [i.upper() for i in userinput]
     codedlist = []
 
     rotor1.defswitch(rotorsetting1)
@@ -89,6 +94,8 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
     rotor3.defswitch(rotorsetting3)
 
     for i in userinputlist:
+
+        i = plugboard(i, plugdiction)                       #Through plugboard
 
         i = alphabet_dict[i]                                #From touchpress through rotor 1
         i = rotor1.listname[i]
@@ -115,7 +122,10 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
         i = i - rotor1.position                             #From rotor 1 back through the output
 
-        codedlist.append(alphabet_list[i])
+        i = alphabet_list[i]                                #Through plugboard
+        i = plugboard(i, plugdiction)
+
+        codedlist.append(i)
         switch_rotors(rotor1, rotor2, rotor3)
 
     rotor1.reset()
@@ -129,11 +139,89 @@ rotorII = RotorClass(rotor_II_list, rotorII_reversed_list, "Rotor II", 0, 5)
 rotorIII = RotorClass(rotor_III_list, rotorIII_reversed_list, "Rotor III", 0, 22)
 reflectorB = ReflectorClass(reflector_B_list, "B")
 
-#for i in range(26):
-#    for j in range(26):
-#        for k in range(26):
-#            print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
+def RatioCheck(inputsent):
+    points = 0
+    inputsent = inputsent.lower()
+
+    klcount = 0
+    medklcount = 0
+
+    for i in inputsent:
+        if i.islower():
+            if i in "aeoui":
+                klcount += 1
+            else:
+                medklcount += 1
+
+    ratio = klcount / medklcount
+
+    if 0.4 <= ratio < 0.5:
+        points += 5
+    elif 0.5 <= ratio < 0.6:
+        points += 10
+    elif 0.6 <= ratio < 0.7:
+        points += 30
+    elif 0.7 <= ratio < 0.8:
+        points += 20
+    elif 0.8 <= ratio < 1:
+        points += 5
+    else:
+        points = 0
+
+    return(points)
+
+def CheckMedklink(inputsent):
+    points = 0
+
+    inputsent = inputsent.lower()
+
+    splitlist = inputsent.split(" ")
+    inputsent = "".join(splitlist)
+
+    counter = 0
+    streak = 0
+
+    for i in inputsent:
+        if i.islower():
+            if i in "aeoui":
+                streak = 0
+            else:
+                streak += 1
+        if streak > 6:
+            counter += 1
+
+    ratio = counter/len(inputsent)
+
+    if ratio < 0.01:
+        points += 30
+    else:
+        points += 0
+
+    return(points)
+
+def CheckCommComb(inputsent):
+    count = 0
+    common = "ing eer sch ere oor ren erd ter ste aar voo aan ges est cht ger pro bes eid ten der ken hei pla per eri den end len pre bel gen tie eld ele isc nde ber and gro ers gep esc ent bed ede oed pen lin vol sti lĳk tig tel ens roe ver bek ort loe ist ard gev tte nen ati gra eve ker pol rin ier ete gel raa art loo lan lle sse bev roo eke ond gew kke rie nne par tis ach nge ant sen ast dig laa ans ang blo"
+    commonlist = common.split(" ")
+
+    inputlist = inputsent.split(" ")
+    inputsent = "".join(inputlist)
+
+    for i in commonlist:
+        if i in inputsent.lower():
+            count += 1
+
+    return(count)
+
+for i in range(26):
+   for j in range(26):
+       for k in range(26):
+           outcome = enigma("ECQIQCCLBHCPQZXBJBFTEYFRESRRKVBGIOHKFHTQEGMXTPVCMPPLHMQFXYRSFJXGEDSBPZSVSFCMYFUYJURD", rotorI, rotorII, rotorIII, reflectorB, i, j, k)
+           checker = RatioCheck(outcome) + CheckMedklink(outcome) + CheckCommComb(outcome)
+           if checker > 45:
+               print("%s, %s Rotorposition: %s, %s, %s" %(outcome, checker, i, j, k))
 
 
-print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, 10, 25, 25))
-print(enigma("WLYPGCZDFKUKIVCTFZGRJDPUDSBYNUBYFPTZUXSWCTFSGSNYFBVYDULJBKPMIGSGTJPGOQXBITJNIUEZFSUQECEGOMZZUCRVIPMZ", rotorI, rotorII, rotorIII, reflectorB, 10, 25, 25))
+
+
+print(enigma("InhetRomeinseRijkhadmentweevolkstribunendiedebelangenvanhetvolkbijdesenaatvoorlegden", rotorI, rotorII, rotorIII, reflectorB, 19, 5, 12))
