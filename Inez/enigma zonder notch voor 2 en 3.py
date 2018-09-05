@@ -25,7 +25,7 @@ for i in woord:
     while ni > 25:
         ni -= 26
     i = alphabet[ni]
-
+    print("rotor_I in: " + i)
     rotor_I ={ "a":"e",
                "b":"k",
                "c":"m",
@@ -57,12 +57,12 @@ for i in woord:
         ni += 26
     while ni > 25:
         ni -= 26
-    i = alphabet[ni]
-    ni = alphabet.find(i) - count_II
-    while ni < 0:
-        ni += 26
-    while ni > 25:
-        ni -= 26
+    # i = alphabet[ni]
+    # ni = alphabet.find(i) - count_II
+    # while ni < 0:
+    #     ni += 26
+    # while ni > 25:
+    #     ni -= 26
     i = alphabet[ni]
     ni = ni + count_II
     while ni < 0:
@@ -70,7 +70,7 @@ for i in woord:
     while ni > 25:
         ni -= 26
     i = alphabet[ni]
-
+    print("rotor_II in: " + i)
     rotor_II ={"a":"a",
                "b":"j",
                "c":"d",
@@ -99,7 +99,7 @@ for i in woord:
                "z":"e" }
 
     i = alphabet[alphabet.find(rotor_II[i]) - count_II]
-    ni = alphabet.find(i) - count_III
+    ni = alphabet.find(i)
     while ni < 0:
         ni += 26
     while ni > 25:
@@ -111,7 +111,7 @@ for i in woord:
     while ni > 25:
         ni -= 26
     i = alphabet[ni]
-
+    print ("rotor_III in: " + i)
     rotor_III ={"a":"b",
                "b":"d",
                "c":"f",
@@ -139,13 +139,13 @@ for i in woord:
                "y":"q",
                "z":"o" }
     i = alphabet[alphabet.find(rotor_III[i]) - count_III]
-    ni = alphabet.find(i) - count_III
+    ni = alphabet.find(i)
     if ni < 0:
         ni += 26
     elif ni > 25:
         ni -= 26
     i = alphabet[ni]
-
+    print("ref in: " + i)
     #als Count_I 17 is (dus van Q naar R springt) count_II += 1
     dictionary_B = { "a":"y",
                      "b":"r",
@@ -175,6 +175,7 @@ for i in woord:
                      "z": "t"}
 
     i = alphabet[alphabet.find(dictionary_B[i])]
+    print("ref uit: " + i)
     #terug Rotor III
     ni = alphabet.find(i) + count_III
     while ni < 0:
@@ -207,7 +208,24 @@ for i in woord:
     while ni > 25:
         ni -= 26
     i = alphabet[ni]
+    print (i)
     output += str(i)
+
     count_I += 1
+    for n in range(0, 10):
+        if count_I == 17 * n:
+            count_II += 1
+
+    if count_II == 5 and count_I == 17:
+        count_III += 1
+    print (count_I)
+    print (count_II)
+    print (count_III)
+#0,0,0:
+#nftzmgisxipjwgdnjjcoqtyrigdmxfiesrwzgtoiuiejcoqtyrigdmxfiesrwzgtoiuiejco
+#NFTZMGISXIPJWGDNJJCOQTYRIGDMXFIESRWZGTOIUIEKKDCSHTPYOEPVXNHVRWWESFRUXDGWOZDMNKIZWNCZ
+
+#0,4 0
+#uboojeglcpxkublyflgovbuypkojwbowsecqzookviiodtbzdqrojxhnfhbofdzctzqpowvomqn
 
 print (output)
