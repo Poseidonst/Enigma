@@ -1,3 +1,5 @@
+import LanguageRecognitionProgram
+
 alphabet_list = [i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 alphabet_dict = {chr(65+i) : i for i in range(26)}
 
