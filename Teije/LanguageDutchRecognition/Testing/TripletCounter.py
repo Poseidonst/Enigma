@@ -56,4 +56,4 @@ def Triplet(filename):
 
 
 if __name__ == "__main__":
-    Triplet("TextInput.txt")
+    # Triplet("NederlandseWoordenlijst.txt")
