@@ -140,4 +140,5 @@ rotorIII = RotorClass(rotor_III_list, rotorIII_reversed_list, "Rotor III", 0, 22
 reflectorB = ReflectorClass(reflector_B_list, "B")
 
 print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, 11, 25, 25))
+print(enigma("HALLO", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0))
 print(enigma("RUGMXZRTSSGWJXWGZFCNUXEFUJKOBKDWRYZEVNJXFMJOUWUJYYBMWMXLRNNCBRKRLRLLSYKSEMJBQGZTOBGFTXDVUZZFRUIUDXZN", rotorI, rotorII, rotorIII, reflectorB, 11, 25, 25))
