@@ -105,6 +105,7 @@ elif count_III > 25:
 output = ""
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 woord = input("Insert tekst: ")
+woord = woord.lower()
 for i in woord:
     ni = alphabet.find(i) + count_I
     while ni < 0:
