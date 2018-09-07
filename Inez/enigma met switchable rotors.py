@@ -53,31 +53,37 @@ rotor_II ={"a":"a",
            "z":"e" }
 
 rotor_III ={"a":"b",
-           "b":"d",
-           "c":"f",
-           "d":"h",
-           "e":"j",
-           "f":"l",
-           "g":"c",
-           "h":"p",
-           "i":"r",
-           "j":"t",
-           "k":"x",
-           "l":"v",
-           "m":"z",
-           "n":"n",
-           "o":"y",
-           "p":"e",
-           "q":"i",
-           "r":"w",
-           "s":"g",
-           "t":"a",
-           "u":"k",
-           "v":"m",
-           "w":"u",
-           "x":"s",
-           "y":"q",
-           "z":"o" }
+            "b":"d",
+            "c":"f",
+            "d":"h",
+            "e":"j",
+            "f":"l",
+            "g":"c",
+            "h":"p",
+            "i":"r",
+            "j":"t",
+            "k":"x",
+            "l":"v",
+            "m":"z",
+            "n":"n",
+            "o":"y",
+            "p":"e",
+            "q":"i",
+            "r":"w",
+            "s":"g",
+            "t":"a",
+            "u":"k",
+            "v":"m",
+            "w":"u",
+            "x":"s",
+            "y":"q",
+            "z":"o" }
+
+switch_1 = 0
+switch_2 = 0
+rotor1 = input("Welke rotor op 1e plaats? ")
+rotor2 = input("Welke rotor op 2e plaats? ")
+rotor3 = input("Welke rotor op 3e plaats? ")
 
 count_I = int(input("Instelling rotorI: "))
 if count_I < 0:
@@ -108,15 +114,18 @@ for i in woord:
     i = alphabet[ni]
 
     print("rotor_I in: " + i)
-    rotor1 = input("Welke rotor op 1e plaats? ")
-        if rotor1 == I:
-            rotor1 = rotor_I
-        elif rotor1 == II:
-            rotor1 = rotor_II
-        elif rotor1 == III:
-            rotor1 = III
 
-    ni = alphabet.find(rotor_1[i]) - count_I
+    if rotor1 == "I":
+        rotor1 = rotor_I
+        switch_1 += 17
+    elif rotor1 == "II":
+        rotor1 = rotor_II
+        switch_1 += 5
+    elif rotor1 == "III":
+        rotor1 = rotor_III
+        switch_1 += 22
+
+    ni = alphabet.find(rotor1[i]) - count_I
     while ni < 0:
         ni += 26
     while ni > 25:
@@ -130,15 +139,18 @@ for i in woord:
     i = alphabet[ni]
 
     print("rotor_II in: " + i)
-    rotor2 = input("Welke rotor op 2e plaats? ")
-        if rotor2 == I:
-            rRotor2 = rotor_I
-        elif rotor2 == II:
-            rotor2 = rotor_II
-        elif rotor2 == III:
-            rotor2 = III
 
-    i = alphabet[alphabet.find(rotor_2[i]) - count_II]
+    if rotor2 == "I":
+        rotor2 = rotor_I
+        switch_2 += 17
+    elif rotor2 == "II":
+        rotor2 = rotor_II
+        switch_2 = 5
+    elif rotor2 == "III":
+        rotor2 = rotor_III
+        switch_2 = 22
+
+    i = alphabet[alphabet.find(rotor2[i]) - count_II]
     ni = alphabet.find(i)
     while ni < 0:
         ni += 26
@@ -153,15 +165,18 @@ for i in woord:
     i = alphabet[ni]
 
     print ("rotor_III in: " + i)
-    rotor2 = input("Welke rotor op 2e plaats? ")
-        if rotor2 == I:
-            rotor2 = rotor_I
-        elif rotor2 == II:
-            rotor2 = rotor_II
-        elif rotor2 == III:
-            rotor2 = III
 
-    i = alphabet[alphabet.find(rotor_3[i]) - count_III]
+    if rotor3 == "I":
+        rotor3 = rotor_I
+        switch_3 = 17
+    elif rotor3 == "II":
+        rotor3 = rotor_II
+        switch_3 = 5
+    elif rotor3 == "III":
+        rotor3 = rotor_III
+        switch_3 = 22
+
+    i = alphabet[alphabet.find(rotor3[i]) - count_III]
     ni = alphabet.find(i)
     if ni < 0:
         ni += 26
@@ -236,19 +251,18 @@ for i in woord:
 
     count_I += 1
     for n in range(0, 10):
-        if count_I == 17 * n:
+        if count_I == switch_1 + n * 26:
             count_II += 1
-
-    if count_II == 5 and count_I == 17:
+    if count_II == switch_2 + n * 26 and count_I == switch_1 + n * 26:
         count_III += 1
-    print (count_I)
-    print (count_II)
-    print (count_III)
-#0,0,0:
-#nftzmgisxipjwgdnjjcoqtyrigdmxfiesrwzgtoiuiejcoqtyrigdmxfiesrwzgtoiuiejco
-#NFTZMGISXIPJWGDNJJCOQTYRIGDMXFIESRWZGTOIUIEKKDCSHTPYOEPVXNHVRWWESFRUXDGWOZDMNKIZWNCZ
 
-#0,4 0
-#uboojeglcpxkublyflgovbuypkojwbowsecqzookviiodtbzdqrojxhnfhbofdzctzqpowvomqn
+    #print (count_I)
+    #print (count_II)
+    #print (count_III)
+#mypsncbnjxumkhvtsoeovbuypczciffhbofmjxiytwlzdsthzqmgtxxwihdobtkcgzuveyusthzqmgtxxwih
+#MYPSNRWMHYRGLVRUPTFUPUCNEOMQHBECBNJXVZFSQMZBUSEFXWFCPLIPRQLKPMUMKHVK
 
+#nftzmesrwzgtoiuiejcoqtyrigdmxfinhvrwwesfruxkkdcshtpyoepvxzducobltuyhddgwozdmnkizwncegl
+#NFTZMGISXIPJWGDNJJCOQTYRIGDMXFIESRWZGTOIUIEKKDCSHTPYOEPVXNHVRWWESFRUXDGWOZDM
+#nftzmgisxipjwgdnjjcoqtyrigdmxfiesrwzgtoiuiekkdcshtpyoepvxnhvrwwesfruxdgwozdmnkizwnczduco
 print (output)

@@ -213,10 +213,10 @@ for i in woord:
 
     count_I += 1
     for n in range(0, 10):
-        if count_I == 17 + n * 26:
+        if count_I == 17 * n:
             count_II += 1
 
-    if count_II == 5 + n * 26 and count_I == 17 + n * 26:
+    if count_II == 5 and count_I == 17:
         count_III += 1
     print (count_I)
     print (count_II)
