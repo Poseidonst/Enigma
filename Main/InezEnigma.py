@@ -241,7 +241,7 @@ def Enigma(cnt1, cnt2, cnt3, tekst):
         while ni > 25:
             ni -= 26
         i = alphabet[ni]
-        print (i)
+
         output += str(i)
 
         count_I += 1
@@ -251,7 +251,7 @@ def Enigma(cnt1, cnt2, cnt3, tekst):
         if count_II == switch_2 + n * 26 and count_I == switch_1 + n * 26:
             count_III += 1
 
-    return (output)
+    print(output, end="")
 
 if __name__ == "__main__":
-    Enigma(0, 0, 0, "hallo")
+    Enigma(0, 0, 0, "A" * 10000)
