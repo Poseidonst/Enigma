@@ -113,7 +113,7 @@ for i in woord:
         ni -= 26
     i = alphabet[ni]
 
-    print("rotor_I in: " + i)
+    #print("rotor_I in: " + i)
 
     if rotor1 == "I":
         rotor1 = rotor_I
@@ -138,7 +138,7 @@ for i in woord:
         ni -= 26
     i = alphabet[ni]
 
-    print("rotor_II in: " + i)
+    #print("rotor_II in: " + i)
 
     if rotor2 == "I":
         rotor2 = rotor_I
@@ -164,7 +164,7 @@ for i in woord:
         ni -= 26
     i = alphabet[ni]
 
-    print ("rotor_III in: " + i)
+    #print ("rotor_III in: " + i)
 
     if rotor3 == "I":
         rotor3 = rotor_I
@@ -183,7 +183,7 @@ for i in woord:
     elif ni > 25:
         ni -= 26
     i = alphabet[ni]
-    print("ref in: " + i)
+    #print("ref in: " + i)
 
     dictionary_B = { "a":"y",
                      "b":"r",
@@ -213,7 +213,7 @@ for i in woord:
                      "z": "t"}
 
     i = alphabet[alphabet.find(dictionary_B[i])]
-    print("ref uit: " + i)
+    #print("ref uit: " + i)
     #terug Rotor III
     ni = alphabet.find(i) + count_III
     while ni < 0:
