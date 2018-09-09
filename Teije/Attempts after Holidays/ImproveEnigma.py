@@ -35,47 +35,32 @@ class RotorClass(object):
         self.rotortip = rotortip
         self.revlistname = revlistname
 
-    def defswitch(self, places):
-        while places < 0:               #This way it works with negative list as well
-            places = places + 26
-        while places > 26:
-            places = places - 26       #Switches and stays at that position
-        for i in range(0, places):
-            self.listname += [self.listname.pop(0)]
-            self.revlistname += [self.revlistname.pop(0)]
-            self.position += 1
-            if self.position == 27:
-                self.position = 1
-        return (self.listname)
+    def DefRotate(self, number):
+        self.position = number
+        while self.position < 0:
+            self.position += 26
+        while self.position > 25:
+            self.position -= 26
 
-    def switch1(self):
-        self.listname += [self.listname.pop(0)]
-        self.revlistname += [self.revlistname.pop(0)]
+    def Rotate(self):
         self.position += 1
-        if self.position == 27:
-            self.position = 1
-        return (self.listname)
+        if self.position == 26:
+            self.position = 0
 
-    def reset(self):                    #Resets back to starting position
-        places = 26 - self.position
-        for i in range(0, places):
-            self.listname += [self.listname.pop(0)]
-            self.revlistname += [self.revlistname.pop(0)]
-        self.position = 0
+def switch_rotors(rotor1, rotor2, rotor3):
+    rotor1.Rotate()
+    if rotor1.position == rotor1.rotortip:
+        rotor2.Rotate()
+    if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
+        rotor3.Rotate()
 
 def get_difference(rotor1, rotor2):
     difference = rotor2.position - rotor1.position
     return(difference)
 
-def switch_rotors(rotor1, rotor2, rotor3):
-    rotor1.switch1()
-    if rotor1.position == rotor1.rotortip:
-        rotor2.switch1()
-    if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
-        rotor3.switch1()
-
 plugdiction = {"A" : "Z", "Z" : "A",
                "B" : "T", "T" : "B"}
+
 
 def plugboard(input, plugdict):
     if input in plugdict:
@@ -89,48 +74,54 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
     userinputlist = [i for i in userinput]
     codedlist = []
 
-    rotor1.defswitch(rotorsetting1)
-    rotor2.defswitch(rotorsetting2)
-    rotor3.defswitch(rotorsetting3)
+    rotor1.DefRotate(rotorsetting1)
+    rotor2.DefRotate(rotorsetting2)
+    rotor3.DefRotate(rotorsetting3)
 
     for i in userinputlist:
+        pos1 = rotor1.position
+        pos3 = rotor3.position
 
-        i = plugboard(i, plugdiction)                       #Through plugboard
+        diff1 = get_difference(rotor1, rotor2)
+        diff2 = get_difference(rotor2, rotor3)
+        i = plugboard(i, plugdiction)
 
-        i = alphabet_dict[i]                                #From touchpress through rotor 1
+        i = alphabet_dict[i]
+        i += pos1
+        i = i % 26
         i = rotor1.listname[i]
 
-        diff = get_difference(rotor1, rotor2)               #From rotor1 through rotor2
-        i += diff
-        i = rotor2.listname[i - rotor2.position]
+        i += diff1
+        i = i % 26
+        i = rotor2.listname[i]
 
-        diff = get_difference(rotor2, rotor3)               #From rotor2 through rotor3
-        i += diff
-        i = rotor3.listname[i - rotor3.position]
+        i += diff2
+        i = i % 26
+        i = rotor3.listname[i]
 
-        i = reflector.listname[i - rotor3.position]        #From rotor3 through reflector
+        i -= pos3
+        i = i % 26
+        i = reflector.listname[i]
 
-        i = rotor3.revlistname[i]                           #From reflector back through rotor 3
+        i += pos3
+        i = i % 26
+        i = rotor3.revlistname[i]
 
-        diff = get_difference(rotor3, rotor2)               #From rotor 3 back through rotor 2
-        i += diff
-        i = rotor2.revlistname[i - rotor2.position]
+        i -= diff2
+        i = i % 26
+        i = rotor2.revlistname[i]
 
-        diff = get_difference(rotor2, rotor1)               #From rotor 2 back through rotor 1
-        i += diff
-        i = rotor1.revlistname[i - rotor1.position]
+        i -= diff1
+        i = i % 26
+        i = rotor1.revlistname[i]
 
-        i = i - rotor1.position                             #From rotor 1 back through the output
+        i -= pos1
+        i = alphabet_list[i]
 
-        i = alphabet_list[i]                                #Through plugboard
         i = plugboard(i, plugdiction)
 
         codedlist.append(i)
         switch_rotors(rotor1, rotor2, rotor3)
-
-    rotor1.reset()
-    rotor2.reset()
-    rotor3.reset()
 
     return("".join(codedlist))
 
@@ -139,7 +130,8 @@ rotorII = RotorClass(rotor_II_list, rotorII_reversed_list, "Rotor II", 0, 5)
 rotorIII = RotorClass(rotor_III_list, rotorIII_reversed_list, "Rotor III", 0, 22)
 reflectorB = ReflectorClass(reflector_B_list, "B")
 
-for i in range(0, 26):
-    for j in range(0, 26):
-        for k in range(0, 26):
-            print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
+if __name__ == "__main__":
+    for i in range(0, 26):
+        for j in range(0, 26):
+            for k in range(0, 26):
+                enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k)
