@@ -142,4 +142,4 @@ reflectorB = ReflectorClass(reflector_B_list, "B")
 for i in range(0, 26):
     for j in range(0, 26):
         for k in range(0, 26):
-            print(enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k))
+            enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k)
