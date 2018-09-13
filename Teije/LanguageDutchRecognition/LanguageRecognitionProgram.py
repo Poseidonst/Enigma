@@ -104,4 +104,4 @@ def LangRecog(input):
 
 
 if __name__ == "__main__":
-    print(LangRecog("InhetRomeinseRijkhadmentweevolkstribunendiedebelangenvanhetvolkbijdesenaatvoorlegden"))
+    print(LangRecog("ajksdlfjkwjelfkjsdlkfjasldk"))

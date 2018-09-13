@@ -212,7 +212,7 @@ def CheckCommComb(inputsent):
             count += 1
 
     return(count)
-
+print(enigma("ECQIQCCLBHCPQZXBJBFTEYFRESRRKVBGIOHKFHTQEGMXTPVCMPPLHMQFXYRSFJXGEDSBPZSVSFCMYFUYJURD", rotorI, rotorII, rotorIII, reflectorB, 19, 5, 12))
 for i in range(26):
    for j in range(26):
        for k in range(26):
