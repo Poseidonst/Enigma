@@ -99,10 +99,10 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 #de dictionaries voor de rotors en reflector waar i doorheen gaat; de volgorde wordt ligt niet vast.
 
 if __name__ == "__main__":
-     for i in range(0, 26):
-         for j in range(0, 26):
-             for k in range(0, 26):
-                 enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k, plugdiction)
+    for i in range(0, 26):
+        for j in range(0, 26):
+            for k in range(0, 26):
+                enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k, plugdiction)
 
     print(enigma("A"*100, rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
     #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
