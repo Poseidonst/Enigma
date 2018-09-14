@@ -244,6 +244,7 @@ def crackEnigma(message, guess):
 
 if __name__ == "__main__":
     print(enigma("wetterbericht", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, {"W":"Q", "Q":"W", "J":"P", "P":"J"})) #Empty dict = SPIGJFNNDAAZO
+    print(enigma("SVAEDUQHFAVJD", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 2, {"A":"E", "E":"A", "D":"S", "S":"D", "W":"V" , "V":"W", "F":"U" , "U":"F", "Z":"Q" , "Q":"Z", "Y":"H" , "H":"Y", "P":"J" , "J":"P"}))
     # print(enigmaOne("w", rotorI, rotorII, rotorIII, reflectorB, 20, 20, 20, emptydict))
     # print(enigma("a", rotorI, rotorII, rotorIII, reflectorB, 25, 25, 24, testdict))
-    crackEnigma("wetterbericht", "SVAEDUQHFAVJD")
+    # crackEnigma("wetterbericht", "SVAEDUQHFAVJD")
