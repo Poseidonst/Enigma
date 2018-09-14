@@ -96,6 +96,68 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
     return(output)
 
+def enigmaOne(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3, plugdictionary):
+    #userinput is de te coderen tekst; rotor1, rotor2 en rotor3 bepalen de volgorde van de rotors; rotorsetting bepaalt per rotor op welke positie hij start; plugdictionary is het plugboard.
+    plugdict = plugdictionary
+
+    output = "" #hierin komt de gecodeerde tekst te staan
+
+    rotor1.position = rotorsetting1 % 26
+    rotor2.position = rotorsetting2 % 26
+    rotor3.position = rotorsetting3 % 26
+    #de "% 26" deelt de rotorsetting door 26 en geeft wat er nog over is, zo blijven de getallen tussen 0 en 25 zodat de getallen in het bereik van de dictionaries vallen
+
+    rotor1list = rotor1.listname
+    rotor2list = rotor2.listname
+    rotor3list = rotor3.listname
+
+    rotor1revlist = rotor1.revlistname
+    rotor2revlist = rotor2.revlistname
+    rotor3revlist = rotor3.revlistname
+
+    reflector = reflector.listname
+
+    pos1 = rotor1.position
+    pos2 = rotor2.position
+    pos3 = rotor3.position
+
+    diff1 = pos2 - pos1
+    diff2 = pos3 - pos2
+    #als de rotors ten opzichte van elkaar gedraaid staan komt er een ander resultaat uit dan bij beginstand, diff zorgt binnen onze functie voor dit verschil
+
+    try:
+        i = plugdict[i]
+    except:
+        pass
+    i = userinput.upper()
+    i = alphabet_dict[i]
+
+    i = rotor1list[(i + pos1) % 26] #i gaat door rotor1 lijst
+
+    i = rotor2list[(i + diff1) % 26]#i gaat door rotor2 lijst
+
+    i = rotor3list[(i + diff2) % 26]#i gaat door rotor3 lijst
+
+    i = reflector[(i - pos3) % 26]#i gaat door de reflector
+
+    i = rotor3revlist[(i + pos3) % 26]#i gaat terug door rotor3 lijst
+
+    i = rotor2revlist[(i - diff2) % 26]#i gaat terug door rotor2 lijst
+
+    i = rotor1revlist[(i - diff1) % 26]#i gaat terug door rotor1 lijst
+
+    i = alphabet_list[(i - pos1) % 26]
+    #pos1 en diff1 compenseren bij de rotors en reflectoren de draaiing
+
+    try:
+        i = plugdict[i]
+    except:
+        pass
+
+    output += i
+
+    return(output)
+
 rotorI = RotorClass([alphabet_dict[i] for i in "EKMFLGDQVZNTOWYHXUSPAIBRCJ"], [20, 22, 24, 6, 0, 3, 5, 15, 21, 25, 1, 4, 2, 10, 12, 19, 7, 23, 18, 11, 17, 8, 13, 16, 14, 9], 0, 17)
 rotorII = RotorClass([alphabet_dict[i] for i in "AJDKSIRUXBLHWTMCQGZNPYFVOE"], [0, 9, 15, 2, 25, 22, 17, 11, 5, 1, 3, 10, 14, 19, 24, 20, 16, 6, 4, 13, 7, 23, 12, 8, 21, 18], 0, 5)
 rotorIII = RotorClass([alphabet_dict[i] for i in "BDFHJLCPRTXVZNYEIWGAKMUSQO"], [19, 0, 6, 1, 15, 2, 18, 3, 16, 4, 20, 5, 21, 13, 25, 7, 24, 8, 23, 9, 22, 11, 17, 10, 14, 12], 0, 22)
@@ -110,35 +172,34 @@ def crackEnigma(message, guess):
     message = message.upper()
     guess = guess.upper()
     for i in range(0, 26):
-        for j in range(0, 26):
-            for k in range(0, 26):
+        for j in range(00, 26):
+            for k in range(00, 26):
+                ivar = i
+                jvar = j
+                kvar = k
                 for p in range(0, len(message)):
-                    enigmamessage = enigma(message[p], rotorI, rotorII, rotorIII, reflectorB, i + p, j, k, diction)
-                    enigmamessagerev = enigma(guess[p], rotorI, rotorII, rotorIII, reflectorB, i + p, j, k, diction)
-                    print(message[p] +enigmamessagerev + enigmamessage + guess[p] + " " + str(i + p) + " " + str(j) + " " + str(k))
-                    # if enigmamessage == guess[p]:
-                    #     contain += "   "
-                    # elif enigmamessage in contain or guess[p] in contain:
-                    #     contain += "//" + guess[p] + enigmamessage + "   " * (len(message) - p - 2)
-                    #     break
-                    # else:
-                    #     diction[guess[p]] = enigmamessage
-                    #     diction[enigmamessage] = guess[p]
-                    #     contain += guess[p] + enigmamessage + " "
-                    #
-                    # if enigmamessagerev == message[p]:
-                    #     contain += "   "
-                    # elif enigmamessagerev in contain2 or message[p] in contain2:
-                    #     contain2 += "//" + message[p] + enigmamessagerev + "   " * (len(message) - p - 2)
-                    #     break
-                    # else:
-                    #     if enigmamessagerev in contain or message[p] in contain:
-                    #         diction[guess[p]] = enigmamessage
-                    #         diction[enigmamessage] = guess[p]
-                    #     contain2 += message[p] + enigmamessagerev + " "
 
+                    enigmamessage = enigmaOne(message[p], rotorI, rotorII, rotorIII, reflectorB, ivar, jvar, kvar, diction)
+                    enigmamessagerev = enigmaOne(guess[p], rotorI, rotorII, rotorIII, reflectorB, ivar, jvar, kvar, diction)
+
+                    if message[p] in contain or enigmamessagerev in contain:
+                        if not message[p] + enigmamessagerev in contain and not enigmamessagerev + message[p] in contain:
+                            contain += "// " + message[p] + enigmamessagerev
+                            break
+                        else:
+                            contain += message[p] + enigmamessagerev + " "
+                    else:
+                        contain += message[p] + enigmamessagerev + " "
+                        diction[message[p]] = enigmamessagerev
+                        diction[enigmamessagerev] = message[p]
+
+                    ivar = (ivar + 1) % 26
+                    if ivar == rotorI.rotortip:
+                        jvar = (jvar + 1) % 26
+                    if ivar == rotorI.rotortip and jvar == rotorII.rotortip:
+                        kvar = (kvar + 1) % 26
                 else:
-                    pass
+                    print(contain + " " + str(i) + " " + str(j) + " " + str(k))
 
                 # print(contain + str(i) + " " + str(j) + " " + str(k))
                 # print(contain2)
@@ -146,7 +207,9 @@ def crackEnigma(message, guess):
                 contain = ""
                 contain2 = ""
 
+
 if __name__ == "__main__":
-    print(enigma("wetterbericht", rotorI, rotorII, rotorIII, reflectorB, 20, 20, 20, emptydict)) #Empty dict = SPIGJFNNDAAZO
+    print(enigma("wetterbericht", rotorI, rotorII, rotorIII, reflectorB, 20, 20, 20, {"W":"Q", "Q":"W", "J":"P", "P":"J"})) #Empty dict = SPIGJFNNDAAZO
+    # print(enigmaOne("w", rotorI, rotorII, rotorIII, reflectorB, 20, 20, 20, emptydict))
     # print(enigma("a", rotorI, rotorII, rotorIII, reflectorB, 25, 25, 24, testdict))
-    crackEnigma("wetterbericht", "ZPKCJFNCDAOZU")
+    crackEnigma("wetterbericht", "ZJIGPFNNDAAZO")
