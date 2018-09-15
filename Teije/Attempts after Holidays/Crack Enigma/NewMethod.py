@@ -187,7 +187,6 @@ def crackEnigma(message, guess):
                     pass
                     for i in mainlist:
                         mainlist.pop(0)
-                        print(mainlist)
                     else:
                         pass
 
