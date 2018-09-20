@@ -174,6 +174,7 @@ def DictionConvert(list):
     return(diction)
 
 def CrackLoop(guess, message, pos1, pos2, pos3):
+    length = len(message)
     plugdict = {}
     currentlist = []
     checkstring = ""
@@ -201,7 +202,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                 currentlist.append(secondadd)
                 plugdict = DictionConvert(currentlist)
                 checkstring += secondadd
-                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 1:
 
                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                         itemnumber = 1
@@ -225,7 +226,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                 currentlist.append(secondadd)
                                 plugdict = DictionConvert(currentlist)
                                 checkstring += secondadd
-                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 2:
 
                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                         itemnumber = 2
@@ -249,7 +250,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                 currentlist.append(secondadd)
                                                 plugdict = DictionConvert(currentlist)
                                                 checkstring += secondadd
-                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 3:
                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                         itemnumber = 3
                                                         firstadd = guess[itemnumber] + i
@@ -272,7 +273,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                 currentlist.append(secondadd)
                                                                 plugdict = DictionConvert(currentlist)
                                                                 checkstring += secondadd
-                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 4:
                                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                                         itemnumber = 4
                                                                         firstadd = guess[itemnumber] + i
@@ -295,7 +296,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                                 currentlist.append(secondadd)
                                                                                 plugdict = DictionConvert(currentlist)
                                                                                 checkstring += secondadd
-                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 5:
                                                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                                                         itemnumber = 5
                                                                                         firstadd = guess[itemnumber] + i
@@ -318,7 +319,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                                                 currentlist.append(secondadd)
                                                                                                 plugdict = DictionConvert(currentlist)
                                                                                                 checkstring += secondadd
-                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 6:
                                                                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                                                                         itemnumber = 6
                                                                                                         firstadd = guess[itemnumber] + i
@@ -341,7 +342,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                                                                 currentlist.append(secondadd)
                                                                                                                 plugdict = DictionConvert(currentlist)
                                                                                                                 checkstring += secondadd
-                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 7:
                                                                                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                                                                                         itemnumber = 7
                                                                                                                         firstadd = guess[itemnumber] + i
@@ -364,7 +365,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                                                                                 currentlist.append(secondadd)
                                                                                                                                 plugdict = DictionConvert(currentlist)
                                                                                                                                 checkstring += secondadd
-                                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 8:
                                                                                                                                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                                                                                                                                         itemnumber = 8
                                                                                                                                         firstadd = guess[itemnumber] + i
@@ -387,7 +388,7 @@ def CrackLoop(guess, message, pos1, pos2, pos3):
                                                                                                                                                 currentlist.append(secondadd)
                                                                                                                                                 plugdict = DictionConvert(currentlist)
                                                                                                                                                 checkstring += secondadd
-                                                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1]:
+                                                                                                                                                if enigma(guess[0:itemnumber + 1], rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdict) == message[0:itemnumber + 1] and length > 9:
                                                                                                                                                     listname = [i for i in currentlist if not i[0] == i[1]]
                                                                                                                                                     listname2 = []
                                                                                                                                                     for i in listname:
@@ -479,9 +480,9 @@ def CrackEnigma(message, guess):
 
 
 if __name__ == "__main__":
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU', 'BA'])))
+    print(enigma("HALLO", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU', 'BA'])))
     print(enigma("HALLOHOEGAATHET", rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, DictionConvert(['TC', 'XF', 'ED', 'IK', 'JV', 'CT', 'NS'])))
-    CrackEnigma("MCSTZRBGDPVURAD", "HALLOHOEGAATHET")
+    CrackEnigma("IWONZ", "HALLO")
     # listname = ["AA", "BB", "AA", "CC", "DA", "BA", "AB", "DA"]
     # print(listname)
     # listname = [i for i in listname if i[0] != i[1] and i[::-1] in listname]
