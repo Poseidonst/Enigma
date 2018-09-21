@@ -187,9 +187,95 @@ def DictionConvert(list):
 def CrackLoop(guess, message, pos1, pos2, pos3):
     pass
 
+def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlist, whitelist):
+    length = len(valuelist)
+    for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        currentlist.append(frequent + i)
+        checkstring += frequent + i
+        plugdict = DictionConvert(currentlist)
+        add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[0], 0, 0, plugdict) + impdict[valuelist[0]][1]
+        if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+            for i in currentlist:
+                blacklist.append(i)
+            blacklist.append(add)
+        elif length > 1:
+            currentlist.append(add)
+            checkstring += add
+            plugdict = DictionConvert(currentlist)
+            add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[1], 0, 0, plugdict) + impdict[valuelist[1]][1]
+            if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                for i in currentlist:
+                    blacklist.append(i)
+                blacklist.append(add)
+            elif length > 2:
+                currentlist.append(add)
+                checkstring += add
+                plugdict = DictionConvert(currentlist)
+                add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[2], 0, 0, plugdict) + impdict[valuelist[2]][1]
+                if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                    for i in currentlist:
+                        blacklist.append(i)
+                    blacklist.append(add)
+                elif length > 3:
+                    currentlist.append(add)
+                    checkstring += add
+                    plugdict = DictionConvert(currentlist)
+                    add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[3], 0, 0, plugdict) + impdict[valuelist[3]][1]
+                    if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                        for i in currentlist:
+                            blacklist.append(i)
+                        blacklist.append(add)
+                    elif length > 4:
+                        currentlist.append(add)
+                        checkstring += add
+                        plugdict = DictionConvert(currentlist)
+                        add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[3], 0, 0, plugdict) + impdict[valuelist[3]][1]
+                        if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                            for i in currentlist:
+                                blacklist.append(i)
+                            blacklist.append(add)
+                        elif length > 5:
+                            currentlist.append(add)
+                            checkstring += add
+                            plugdict = DictionConvert(currentlist)
+                            add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[4], 0, 0, plugdict) + impdict[valuelist[4]][1]
+                            if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                                for i in currentlist:
+                                    blacklist.append(i)
+                                blacklist.append(add)
+                            elif length > 6:
+                                currentlist.append(add)
+                                checkstring += add
+                                plugdict = DictionConvert(currentlist)
+                                add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[5], 0, 0, plugdict) + impdict[valuelist[5]][1]
+                                if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                                    for i in currentlist:
+                                        blacklist.append(i)
+                                    blacklist.append(add)
+                            else:
+                                currentlist.append(add)
+                                whitelist.append(currentlist)
+                        else:
+                            currentlist.append(add)
+                            whitelist.append(currentlist)
+                    else:
+                        currentlist.append(add)
+                        whitelist.append(currentlist)
+                else:
+                    currentlist.append(add)
+                    whitelist.append(currentlist)
+            else:
+                currentlist.append(add)
+                whitelist.append(currentlist)
+        else:
+            currentlist.append(add)
+            whitelist.append(currentlist)
+        currentlist = []
+        checkstring = ""
+        plugdict = {}
 
 
-def CrackEnigma(message, guess):
+def CrackEnigma(message, guess, pos1, pos2, pos3):
     total = message + guess
     countdict = {}
     countlist = []
@@ -197,55 +283,52 @@ def CrackEnigma(message, guess):
     currentlist = []
     checkstring = ""
     blacklist = []
+    whitelist = []
+    newdict = {}
+
     for i in total:
         if not i in countdict:
             countdict[i] = 1
         else:
             countdict[i] += 1
+    listname = [i for i in countdict.keys()]
     countlist = list(countdict.values())
-    maximum = max(countlist)
-    frequent = list(countdict.keys())[countlist.index(maximum)]
-    for i in range(len(message)):
-        if message[i] == frequent:
-            impdict[i] = (message[i] + guess[i])
-        if guess[i] == frequent:
-            impdict[i] = (guess[i] + message[i])
+    for i in range(0, len(countdict)):
+        p = max(countlist)
+        index = countlist.index(p)
+        newdict[listname[index]] = p
+        countlist.pop(index)
+        listname.pop(index)
 
-    valuelist = list(impdict.keys())
-    print(valuelist)
 
-    for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        currentlist.append(frequent + i)
-        checkstring += frequent + i
-        plugdict = DictionConvert(currentlist)
-        add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[0], 0, 0, plugdict) + impdict[valuelist[0]][1]
-        if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
-            pass
-        else:
-            currentlist.append(add)
-            checkstring += add
-            add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[1], 0, 0, plugdict) + impdict[valuelist[1]][1]
-            if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
-                pass
-            else:
-                currentlist.append(add)
-                checkstring += add
-                add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[2], 0, 0, plugdict) + impdict[valuelist[2]][1]
-                if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
-                    pass
-                else:
-                    currentlist.append(add)
-                    checkstring += add
-                    add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[3], 0, 0, plugdict) + impdict[valuelist[3]][1]
-                    if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
-                        pass
-                    else:
-                        currentlist.append(add)
-                        checkstring += add
-                        print(currentlist)
-        currentlist = []
-        checkstring = ""
-        plugdict = {}
+    for item in newdict.keys():
+        for i in range(len(message)):
+            if message[i] == item:
+                impdict[i] = (message[i] + guess[i])
+            if guess[i] == item:
+                impdict[i] = (guess[i] + message[i])
+        valuelist = list(impdict.keys())
+        BlockOfCode(checkstring, item, valuelist, impdict, blacklist, currentlist, whitelist)
+        impdict = {}
+
+    blacklist = list(set(blacklist))
+    # print(blacklist)
+    for i in blacklist:
+        if i in "AB BA CD DC RH HR KU UK PL LP FN NF XZ ZX QM MQ GE EG":
+            print(i)
+
+    for i in whitelist:
+        for j in i:
+            if j in blacklist:
+                for k in i:
+                    blacklist.append(k)
+                whitelist.remove(i)
+                break
+    for i in whitelist:
+        print(i)
+
+
+
 
 
 
@@ -254,5 +337,5 @@ def CrackEnigma(message, guess):
 
 
 if __name__ == "__main__":
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU'])))
-    CrackEnigma("MVBECUIRWBMYC", "WETTERBERICHT")
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU', "PL", "FN", "XZ", "QM", "GE"])))
+    CrackEnigma("QYBGAUIQWBQYC", "WETTERBERICHT", 0, 0, 0)
