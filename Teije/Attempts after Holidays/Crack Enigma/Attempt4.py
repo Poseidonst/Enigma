@@ -187,8 +187,12 @@ def DictionConvert(list):
 def CrackLoop(guess, message, pos1, pos2, pos3):
     pass
 
-def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlist, whitelist):
+def BlockOfCode(frequent, valuelist, impdict, blacklist, whitelist, newlist):
     length = len(valuelist)
+    currentlist = newlist[:]
+    checkstring = ""
+    for i in newlist:
+        checkstring += i
     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         currentlist.append(frequent + i)
         checkstring += frequent + i
@@ -203,7 +207,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
             checkstring += add
             plugdict = DictionConvert(currentlist)
             add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[1], 0, 0, plugdict) + impdict[valuelist[1]][1]
-            if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+            if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                 for i in currentlist:
                     blacklist.append(i)
                 blacklist.append(add)
@@ -212,7 +216,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
                 checkstring += add
                 plugdict = DictionConvert(currentlist)
                 add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[2], 0, 0, plugdict) + impdict[valuelist[2]][1]
-                if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                     for i in currentlist:
                         blacklist.append(i)
                     blacklist.append(add)
@@ -221,7 +225,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
                     checkstring += add
                     plugdict = DictionConvert(currentlist)
                     add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[3], 0, 0, plugdict) + impdict[valuelist[3]][1]
-                    if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                    if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                         for i in currentlist:
                             blacklist.append(i)
                         blacklist.append(add)
@@ -230,7 +234,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
                         checkstring += add
                         plugdict = DictionConvert(currentlist)
                         add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[3], 0, 0, plugdict) + impdict[valuelist[3]][1]
-                        if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                        if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                             for i in currentlist:
                                 blacklist.append(i)
                             blacklist.append(add)
@@ -239,7 +243,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
                             checkstring += add
                             plugdict = DictionConvert(currentlist)
                             add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[4], 0, 0, plugdict) + impdict[valuelist[4]][1]
-                            if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                            if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                                 for i in currentlist:
                                     blacklist.append(i)
                                 blacklist.append(add)
@@ -248,7 +252,7 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
                                 checkstring += add
                                 plugdict = DictionConvert(currentlist)
                                 add = enigmaOne(frequent, rotorI, rotorII, rotorIII, reflectorB, valuelist[5], 0, 0, plugdict) + impdict[valuelist[5]][1]
-                                if add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring):
+                                if (add not in currentlist and add[::-1] not in currentlist and (add[0] in checkstring or add[1] in checkstring)) or add in blacklist or add[::-1] in blacklist:
                                     for i in currentlist:
                                         blacklist.append(i)
                                     blacklist.append(add)
@@ -270,8 +274,10 @@ def BlockOfCode(checkstring, frequent, valuelist, impdict, blacklist, currentlis
         else:
             currentlist.append(add)
             whitelist.append(currentlist)
-        currentlist = []
+        currentlist = newlist[:]
         checkstring = ""
+        for i in newlist:
+            checkstring += i
         plugdict = {}
 
 
@@ -291,8 +297,10 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
             countdict[i] = 1
         else:
             countdict[i] += 1
+
     listname = [i for i in countdict.keys()]
     countlist = list(countdict.values())
+
     for i in range(0, len(countdict)):
         p = max(countlist)
         index = countlist.index(p)
@@ -302,32 +310,40 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
 
 
     for item in newdict.keys():
+        first = list(newdict.keys())
+
         for i in range(len(message)):
             if message[i] == item:
                 impdict[i] = (message[i] + guess[i])
             if guess[i] == item:
                 impdict[i] = (guess[i] + message[i])
         valuelist = list(impdict.keys())
-        print(impdict)
-        BlockOfCode(checkstring, item, valuelist, impdict, blacklist, currentlist, whitelist)
+
+        if item == first[0]:
+            BlockOfCode(item, valuelist, impdict, blacklist, whitelist, [])
+        else:
+            for j in whitelist:
+                BlockOfCode(item, valuelist, impdict, blacklist, whitelist, j)
+                whitelist.remove(j)
+        for i in whitelist:
+            print(i)
         impdict = {}
 
-    blacklist = list(set(blacklist))
-    # print(blacklist)
-    for i in blacklist:
-        for j in i:
-            if j == "A":
-                print(i)
 
+    blacklist = list(set(blacklist))
+    # for i in blacklist:
+    #     if i in "BC CB GE EG OQ QO PS SP VA AV IL LI":
+    #         print(i)
+    #
+    # for i in whitelist:
+    #     for j in i:
+    #         if j in blacklist:
+    #             for k in i:
+    #                 blacklist.append(k)
+    #             whitelist.remove(i)
+    #             break
     for i in whitelist:
-        for j in i:
-            if j in blacklist:
-                for k in i:
-                    blacklist.append(k)
-                whitelist.remove(i)
-                break
-    for i in whitelist:
-        # print(i)
+        print(i)
         pass
 
 
@@ -341,5 +357,5 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
 
 if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU', "PL", "FN", "XZ", "QM", "GE"])))
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(["BC", "GE", "OQ", "PS", "VA", "IL"])))
-    CrackEnigma("MYVGCUEMFZPSD", "WETTERBERICHT", 0, 0, 0)
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(["BC", "GE", "OQ", "PS", "NA", "IL"])))
+    CrackEnigma("MYNGCUEMFZPSD", "WETTERBERICHT", 0, 0, 0)
