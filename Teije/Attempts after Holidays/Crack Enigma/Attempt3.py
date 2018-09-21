@@ -490,7 +490,7 @@ if __name__ == "__main__":
     # print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU'])))
     print(enigmaOne("T", rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU']) ))
     # print(enigma("HALLOHOEGAATHET", rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, DictionConvert(['TC', 'XF', 'ED', 'IK', 'JV', 'CT', 'NS'])))
-    # CrackEnigma("MVBECUIRWBMYC", "WETTERBERICHT")
+    CrackEnigma("MVBECUIRWBMYC", "WETTERBERICHT")
     # listname = ["AA", "BB", "AA", "CC", "DA", "BA", "AB", "DA"]
     # print(listname)
     # listname = [i for i in listname if i[0] != i[1] and i[::-1] in listname]
