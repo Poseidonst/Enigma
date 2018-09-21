@@ -308,14 +308,16 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
             if guess[i] == item:
                 impdict[i] = (guess[i] + message[i])
         valuelist = list(impdict.keys())
+        print(impdict)
         BlockOfCode(checkstring, item, valuelist, impdict, blacklist, currentlist, whitelist)
         impdict = {}
 
     blacklist = list(set(blacklist))
     # print(blacklist)
     for i in blacklist:
-        if i in "AB BA CD DC RH HR KU UK PL LP FN NF XZ ZX QM MQ GE EG":
-            print(i)
+        for j in i:
+            if j == "A":
+                print(i)
 
     for i in whitelist:
         for j in i:
@@ -325,7 +327,8 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
                 whitelist.remove(i)
                 break
     for i in whitelist:
-        print(i)
+        # print(i)
+        pass
 
 
 
@@ -338,4 +341,5 @@ def CrackEnigma(message, guess, pos1, pos2, pos3):
 
 if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['AB', 'DC', 'RH', 'KU', "PL", "FN", "XZ", "QM", "GE"])))
-    CrackEnigma("QYBGAUIQWBQYC", "WETTERBERICHT", 0, 0, 0)
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(["BC", "GE", "OQ", "PS", "VA", "IL"])))
+    CrackEnigma("MYVGCUEMFZPSD", "WETTERBERICHT", 0, 0, 0)
