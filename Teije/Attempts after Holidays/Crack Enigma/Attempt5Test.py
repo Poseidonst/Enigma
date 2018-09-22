@@ -374,4 +374,4 @@ if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(["AB", "CD", "EF", "IJ", "KL", "MN", "OP", "QR", "ST"])))
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(["ZX", "PM", "GF"])))
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, DictionConvert(['WW', 'MN', 'EF', 'AB', 'TS', 'RQ', 'TS', 'DC', 'EF', 'KL', 'RQ', 'VV', 'BA', 'IJ', 'EF', 'NM', 'RQ', 'YY', 'IJ', 'VV'])))
-    crackenigma("PVAEDUWHGAVMD", "WETTERBERICHT")
+    crackenigma("NBQCLVJMYVNOH", "WETTERBERICHT")
