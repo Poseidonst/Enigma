@@ -189,7 +189,7 @@ def BruteForce():
     for i in range(26):
         for j in range(26):
             for k in range(26):
-                value = CrackTest("WETTERBERICHT", "AYKZCODIAHZUL", i, j, k)
+                value = CrackTest("WETTERBERICHT", "ZSPNOONQZEBXA", i, j, k)
                 string = str(i)+" " + str(j)+" " + str(k)
                 if value not in counterdict:
                     counterdict[value] = [string]

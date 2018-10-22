@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     print(enigma("A"*100, rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
     #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 8, 15, 10, plugdiction))
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 8, 15, 10, emptydict))
 
     print(enigma("TURINGENIGMA", rotorII, rotorI, rotorIII, reflectorB, 1, 49999, 3, plugdiction))
     #print het resultaat van de string "TURINGENIGMA" door de enigma halen met beginrotorsettings '1,2,3' en de rotors op volgorde II,I,III
