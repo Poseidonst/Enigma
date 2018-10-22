@@ -104,55 +104,65 @@ def DictionConvert(list):
         diction[i[1]] = i[0]
     return(diction)
 
-def FirstTry(letter1, comblist, startpos):
-    letter1 = letter1.upper()
-    letter11 = letter1[::1]
-    dictlist = [["E", "E"]]
-    diction = {}
-    whitelist = []
-    blacklist = []
+def GetMax(dictionary):
+    maximum = 0
+    maximumletters = []
+    maximumletter = ""
+    for i in dictionary.keys():
+        if dictionary[i] >= maximum:
+            if maximumletters and dictionary[maximumletters[0]] != dictionary[i]:
+                maximumletters = []
+            maximumletter = i
+            maximum = dictionary[i]
+            maximumletters.append(i)
+    return(maximumletters)
 
-    for j in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        dictlist = []
-        for i in comblist:
-            diction = DictionConvert(dictlist)
+def Frequency(word, cipher):
+    total = word.upper() + cipher.upper()
+    countdict = {}
+    for i in total:
+        if i not in countdict:
+            countdict[i] = 1
+        else:
+            countdict[i] += 1
+    return(GetMax(countdict))
 
-            newpos = Rotator(startpos[0], startpos[1], startpos[2], int(i[1])-1)
-            output = enigmaOne(j, rotorI, rotorII, rotorIII, reflectorB, newpos[0], newpos[1], newpos[2])
+def Crack(word, cipher):
+    word, cipher = word.upper(), cipher.upper()
+    frequentlist = Frequency(word, cipher)
+    first = frequentlist[0]
+    for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        input = ""
+        dictlist = [first + i]
+        dict2list = [first + i]
+        for j in range(len(word)):
+            rotlist = Rotator(0, 0, 0, j)
+            input = word[j]
+            enigmadict = DictionConvert(dictlist)
+            try:
+                input = enigmadict[input]
+            except:
+                pass
 
-            dictlist.append([output, i[0]])
+            input = enigmaOne(input, rotorI, rotorII, rotorIII, reflectorB, rotlist[0], rotlist[1], rotlist[2])
+            dictlist.append(input + cipher[j])
 
-        arg = True
-        for i in dictlist:
-            for k in dictlist:
-                if not i == k:
-                    for p in i:
-                        if p in k:
-                            if not dictlist in blacklist:
-                                blacklist.append(dictlist)
-                                arg = False
-        if arg:
-            dictlist.append([letter1, j])
-            whitelist.append(dictlist)
-            arg = True
+            input1 = cipher[j]
+            enigma2dict = DictionConvert(dict2list)
+            try:
+                input1 = enigma2dict[input1]
+            except:
+                pass
 
-    for i in whitelist:
-        for k in i:
-            if k in blacklist:
-                i.remove(k)
-    print(whitelist)
-    return(whitelist)
+            input1 = enigmaOne(input1, rotorI, rotorII, rotorIII, reflectorB, rotlist[0], rotlist[1], rotlist[2])
+            dict2list.append(input1 + word[j])
+        print(dictlist)
+        print(dict2list)
 
-def Crack(letter1, comblist, startpos, whitelist):
-    letter1 = letter1.upper()
-    for i in whitelist:
-        diction = DictionConvert(whitelist)
-        try:
-            letter1 = diction[letter1]
-        except:
-            pass
+
 
 
 if __name__ == "__main__":
-    whitelist = FirstTry("E", ["M2", "Y5", "H8"], [0, 0, 0])
-    Crack("T", ["U3", "P4", "D13"], [0,0,0], whitelist)
+    print(Crack("WETTERBERICHT", "MMUPYUXHCZOID"))
+    print(Crack("MMUPYUXHCZOID", "WETTERBERICHT"))
+    # print(enigmaOne("B", rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0))
