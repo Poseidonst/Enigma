@@ -264,38 +264,39 @@ def Crack(message, cipher, st1, st2, st3):
                 input = output[::1]
                 for k in cracklist[2]:
                     if analyse(input, k, output):
-                        input = output[::1]
+                        input1 = output[::1]
                         for l in cracklist[3]:
-                            if analyse(input, l, output):
-                                input = output[::1]
+                            if analyse(input1, l, output):
+                                input2 = output[::1]
                                 for m in cracklist[4]:
-                                    if analyse(input, m, output):
-                                        input = output[::1]
+                                    if analyse(input2, m, output):
+                                        input3 = output[::1]
                                         for n in cracklist[5]:
-                                            if analyse(input, n, output):
-                                                input = output[::1]
+                                            if analyse(input3, n, output):
+                                                input4 = output[::1]
                                                 for o in cracklist[6]:
-                                                    if analyse(input, o, output):
-                                                        input = output[::1]
+                                                    if analyse(input4, o, output):
+                                                        input5 = output[::1]
                                                         for p in cracklist[7]:
-                                                            if analyse(input, p, output):
-                                                                input = output[::1]
+                                                            if analyse(input5, p, output):
+                                                                input6 = output[::1]
                                                                 for q in cracklist[8]:
-                                                                    if analyse(input, q, output):
-                                                                        input = output[::1]
+                                                                    if analyse(input6, q, output):
+                                                                        input7 = output[::1]
                                                                         for r in cracklist[9]:
-                                                                            if analyse(input, r, output):
-                                                                                #-----#
+                                                                            if analyse(input7, r, output):
+                                                                                input8 = output[::1]
                                                                                 for s in cracklist[10]:
-                                                                                    if analyse(input, s, output):
-                                                                                        input = output[::1]
+                                                                                    if analyse(input8, s, output):
+                                                                                        input9 = output[::1]
                                                                                         for t in cracklist[11]:
-                                                                                            if analyse(input, t, output):
-                                                                                                input = output[::1]
+                                                                                            if analyse(input9, t, output):
+                                                                                                input10 = output[::1]
                                                                                                 for u in cracklist[12]:
-                                                                                                    if analyse(input, u, output):
+                                                                                                    if analyse(input10, u, output):
                                                                                                         input = output[::1]
                                                                                                         print(input)
+
 
 
 
@@ -311,10 +312,10 @@ def Crack(message, cipher, st1, st2, st3):
 if __name__ == "__main__":
     # print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction2))
     # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
-    Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
-    # for i in range(26):
-    #     for j in range(26):
-    #         for k in range(26):
-    #             Crack("WETTERBERICHT", "RRUKYCXHVWJND", i, j, k)
-    #             print(i, j, k)
+    # Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
+    for i in range(26):
+        for j in range(26):
+            for k in range(26):
+                Crack("WETTERBERICHT", "RRUKYCXHVWJND", i, j, k)
+                print(i, j, k)
     # print(analyse(['WE', 'RH'], ['EM', 'RH'], []))
