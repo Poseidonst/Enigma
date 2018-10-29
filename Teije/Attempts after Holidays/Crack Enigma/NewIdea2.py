@@ -189,7 +189,7 @@ def BruteForce():
     for i in range(26):
         for j in range(26):
             for k in range(26):
-                value = CrackTest("WETTERBERICHT", "ZSPNOONQZEBXA", i, j, k)
+                value = CrackTest("WETTERBERICHT", "DKMQRVUXYDSVN", i, j, k)
                 string = str(i)+" " + str(j)+" " + str(k)
                 if value not in counterdict:
                     counterdict[value] = [string]
@@ -199,7 +199,19 @@ def BruteForce():
     countlist = counterdict.keys()
     maximum = max(countlist)
     print(counterdict[maximum])
-    print(counterdict[maximum - 1])
+    try:
+        print(counterdict[maximum - 1])
+    except:
+        try:
+            print(counterdict[maximum - 2])
+        except:
+            try:
+                print(counterdict[maximum - 3])
+            except:
+                try:
+                    print(counterdict[maximum - 4])
+                except:
+                    print(counterdict[maximum - 5])
 
 if __name__ == "__main__":
     # print(Crack("WETTERBERICHT", "MMUPYUXHCZOID"))

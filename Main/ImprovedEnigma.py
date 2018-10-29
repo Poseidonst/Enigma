@@ -20,6 +20,16 @@ plugdiction = {"A" : "Z", "Z" : "A",
                "D" : "G", "G" : "D",
                "E" : "H", "H" : "E",}
 
+plugdiction2 = {"A" : "Z", "Z" : "A",
+               "B" : "T", "T" : "B",
+               "C" : "F", "F" : "C",
+               "D" : "G", "G" : "D",
+               "E" : "H", "H" : "E",
+               "I" : "N", "N" : "I",
+               "J" : "O", "O" : "J",
+               "K" : "P", "P" : "K",
+               "L" : "Q", "Q" : "L",
+               "M" : "R", "R" : "M",}
 emptydict = {}
 
 def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3, plugdictionary):
@@ -106,7 +116,7 @@ if __name__ == "__main__":
 
     print(enigma("A"*100, rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
     #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 8, 15, 10, emptydict))
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 8, 17, 10, plugdiction2))
 
     print(enigma("TURINGENIGMA", rotorII, rotorI, rotorIII, reflectorB, 1, 49999, 3, plugdiction))
     #print het resultaat van de string "TURINGENIGMA" door de enigma halen met beginrotorsettings '1,2,3' en de rotors op volgorde II,I,III
