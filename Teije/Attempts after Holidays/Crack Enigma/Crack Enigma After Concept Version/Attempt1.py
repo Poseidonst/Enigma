@@ -307,12 +307,12 @@ def Crack(message, cipher, st1, st2, st3):
 
 
 if __name__ == "__main__":
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 10, 0, plugdiction2))
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 20, plugdiction2))
     # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
     # Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
     for i in range(26):
         for j in range(26):
             for k in range(26):
-                Crack("WETTERBERICHT", "ZLYQUTKHGNHQQ", i, j, k)
+                # Crack("WETTERBERICHT", "LLLLLLLLLLLLLL", i, j, k)
                 print(i, j, k)
     # print(analyse(['WE', 'RH'], ['EM', 'RH'], []))
