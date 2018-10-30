@@ -313,6 +313,6 @@ if __name__ == "__main__":
     for i in range(26):
         for j in range(26):
             for k in range(26):
-                # Crack("WETTERBERICHT", "LLLLLLLLLLLLLL", i, j, k)
+                Crack("WETTERBERICHT", "RRUKYCXHVWJND", i, j, k)
                 print(i, j, k)
     # print(analyse(['WE', 'RH'], ['EM', 'RH'], []))
