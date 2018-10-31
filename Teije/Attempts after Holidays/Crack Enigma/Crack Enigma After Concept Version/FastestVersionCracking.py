@@ -383,7 +383,7 @@ def CrackMulti(message, cipher):
 
 if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 12,10,10, plugdiction2))
-    CrackMulti("WETTERBERICHT", "SCXBJPJADCMOM")
+    CrackMulti("WETTERBERICHT", "RRUKYCXHVWJND")
     # print(freq("WETTERBERICHT", "SCXBJPJADCMOM"))
     # CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
     # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
