@@ -1,4 +1,5 @@
 import multiprocessing
+import time
 
 alphabet_list = [i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 alphabet_dict = {chr(65+i) : i for i in range(26)}
@@ -202,82 +203,73 @@ def DictionConvert(list):
     return(diction)
 
 def analyse(input1, input2, output):
-    state2 = True
-    state = False
-    input1list = []
-    input2list = []
+    input1 = list(set(input1))
+    state = True
+    inputstr1 = ""
+    inputstr2 = ""
+
     for i in input1:
-        for j in i:
-            input1list.append(j)
+        inputstr1 += i
 
     for i in input2:
-        for j in i:
-            input2list.append(j)
+        inputstr2 += i
 
-    # print(input1list)
-    # print(input2list)
-
-    for i in input1list:
-        if i in input2list:
+    for i in inputstr1:
+        if i in inputstr2:
+            for i in input1:
+                for j in inputstr2:
+                    if j in i:
+                        if i not in input2 and i[::-1] not in input2:
+                            state = False
+                            break
             break
-    else:
-        state = True
-
-    if not state:
-        for i in input1:
-            for j in input2list:
-                if j in i:
-                    if i not in input2 and i[::-1] not in input2:
-                        state2 = False
-        if state2:
-            state = True
 
     if state:
-        for i in range(len(output)):
-            output.pop(0)
-        # print(output)
-        for i in input1:
-            output.append(i)
-        for i in input2:
-            output.append(i)
-        # print(output)
+        output.clear()
+
+        for i in input1 + input2:
+            if i not in output and i[::-1] not in output:
+                output.append(i)
+
     return(state)
 
 def freq(message, cipher):
-    message, cipher = message.upper(), cipher.upper()
     outputdict = {}
     for i in message + cipher:
         if i not in outputdict:
             outputdict[i] = 1
         else:
             outputdict[i] += 1
-    blacklist = []
-    for i in outputdict.items():
-        if i[1] == 1:
-            blacklist.append(i[0])
-
-    for i in blacklist:
-        del(outputdict[i])
-
 
     outputlist = []
     maximum = max(outputdict.values())
     for i in outputdict.items():
         if i[1] == maximum:
             outputlist.append(i[0])
-    if maximum > 2:
+    if maximum > 1:
         for i in outputdict.items():
             if i[1] == maximum - 1:
                 outputlist.append(i[0])
-    if maximum > 3:
+    if maximum > 2:
         for i in outputdict.items():
             if i[1] == maximum - 2:
                 outputlist.append(i[0])
-    if maximum > 4:
+    if maximum > 3:
         for i in outputdict.items():
             if i[1] == maximum - 3:
                 outputlist.append(i[0])
-
+    if maximum > 4:
+        for i in outputdict.items():
+            if i[1] == maximum - 4:
+                outputlist.append(i[0])
+    if maximum > 5:
+        for i in outputdict.items():
+            if i[1] == maximum - 5:
+                outputlist.append(i[0])
+    if maximum > 6:
+        for i in outputdict.items():
+            if i[1] == maximum - 6:
+                outputlist.append(i[0])
 
     defoutputlist = []
     for output in outputlist:
@@ -286,12 +278,9 @@ def freq(message, cipher):
                 defoutputlist.append(i)
             elif cipher[i] == output and i not in defoutputlist:
                 defoutputlist.append(i)
-
     return(defoutputlist)
 
 def Crack(message, cipher, st1, st2, st3):
-
-    message, cipher = message.upper(), cipher.upper()
     cracklist = []
     blacklist = []
     for j in range(0, len(message)):
@@ -302,10 +291,9 @@ def Crack(message, cipher, st1, st2, st3):
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             msgi = msg + i
-            testdict = DictionConvert([msgi])
-            var = enigmaOne(msg, rotorI, rotorII, rotorIII, reflectorB, pos[0], pos[1], pos[2], testdict)
+            var = enigmaOne(i, rotorI, rotorII, rotorIII, reflectorB, pos[0], pos[1], pos[2], emptydict)
             ciphvar = ciph + var
-            if ((ciph not in msgi and var not in msgi and msg not in ciphvar and i not in ciphvar) or ciphvar == msgi or ciphvar[::-1] == msgi) and ciphvar not in blacklist and ciphvar[::1] not in blacklist and msgi not in blacklist and msgi[::-1] not in blacklist:
+            if ((ciph not in msgi and var not in msgi and msg not in ciphvar and i not in ciphvar) or ciphvar == msgi or ciphvar[::-1] == msgi) and ciphvar not in blacklist and ciphvar[::-1] not in blacklist and msgi not in blacklist and msgi[::-1] not in blacklist:
                 outlist.append([msgi, ciphvar])
             else:
                 blacklist.append(msgi)
@@ -319,13 +307,10 @@ def Crack(message, cipher, st1, st2, st3):
     for i in frequencelist:
         cracklist2.append(cracklist[i])
 
-    for i in range(0, len(message)):
-        if i not in frequencelist:
-            cracklist2.append(cracklist[i])
-
     cracklist = cracklist2[::1]
-
+    definput = []
     output = []
+
     for i in cracklist[0]:
         for j in cracklist[1]:
             if analyse(i, j, output):
@@ -362,16 +347,16 @@ def Crack(message, cipher, st1, st2, st3):
                                                                                                 input10 = output[::1]
                                                                                                 for u in cracklist[12]:
                                                                                                     if analyse(input10, u, output):
-                                                                                                        input = output[::1]
-                                                                                                        print(input)
-                                                                                                        return(True)
-
+                                                                                                        definput = output[::1]
+    return(definput)
 
 def CrackLoop(message, cipher, fr, to):
     for i in range(fr, to):
         for j in range(26):
             for k in range(26):
-                if Crack(message, cipher, i, j, k):
+                input = Crack(message, cipher, i, j, k)
+                if input:
+                    print(input)
                     print(i, j, k)
 
 def CrackMulti(message, cipher):
@@ -398,7 +383,7 @@ def CrackMulti(message, cipher):
 
 if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 12,10,10, plugdiction2))
-    CrackMulti("WETTERBERICHT", "RRUKYCXHVWJND")
+    CrackMulti("WETTERBERICHT", "SCXBJPJADCMOM")
     # print(freq("WETTERBERICHT", "SCXBJPJADCMOM"))
     # CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
     # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
@@ -406,6 +391,8 @@ if __name__ == "__main__":
     # for i in range(26):
     #     for j in range(26):
     #         for k in range(26):
-    #             Crack("WETTERBERICHT", "HUPAJWYVWJRPQ", i, j, k)
+    #             start = time.time()
+    #             Crack("WETTERBERICHT", "SCXBJPJADCMOM", i, j, k)
     #             print(i, j, k)
-    # print(analyse(['WE', 'RH'], ['EM', 'RH'], []))
+                # print(time.time() - start)
+    # print(analyse(['EM', 'RH', "EM"], ['EM', 'RH'], []))

@@ -376,7 +376,7 @@ def CrackLoop(message, cipher):
 if __name__ == "__main__":
     print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 24, 25, 24, plugdiction2))
     # freq("WETTERBERICHT", "RRUKYCXHVWJND")
-    CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
+    # CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
     # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
     # Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
     # for i in range(26):
@@ -384,4 +384,8 @@ if __name__ == "__main__":
     #         for k in range(26):
     #             Crack("WETTERBERICHT", "GPXRWWJZXXEZH", i, j, k)
     #             print(i, j, k)
-    # print(analyse(['WE', 'RH'], ['EM', 'RH'], []))
+    for i in range(26):
+        for j in range(26):
+            for k in range(26):
+                Crack("WETTERBERICHT", "SCXBJPJADCMOM", i, j, k)
+                print(i, j, k)
