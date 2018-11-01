@@ -356,8 +356,7 @@ def CrackLoop(message, cipher, fr, to):
             for k in range(26):
                 input = Crack(message, cipher, i, j, k)
                 if input:
-                    print(input)
-                    print(i, j, k)
+                    print(input, i, j ,k)
 
 def CrackMulti(message, cipher):
     process1 = multiprocessing.Process(target=CrackLoop, args=(message.upper(), cipher.upper(), 0, 3))
@@ -379,14 +378,16 @@ def CrackMulti(message, cipher):
     process8.start()
     process9.start()
 
-
-
 if __name__ == "__main__":
     #print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 12,10,10, plugdiction2))
     CrackMulti("WETTERBERICHT", "RRUKYCXHVWJND")
     # print(freq("WETTERBERICHT", "SCXBJPJADCMOM"))
     # CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
-    # Crack("WETTERBERICHT", "RRUKYCXHVWJND", 0, 0, 0)
+    # for i in range(26):
+    #     for k in range(26):
+    #         Crack("WETTERBERICHT", "RRUKYCXHVWJND", i, k, 0)):
+
+
     # Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
     # for i in range(26):
     #     for j in range(26):
