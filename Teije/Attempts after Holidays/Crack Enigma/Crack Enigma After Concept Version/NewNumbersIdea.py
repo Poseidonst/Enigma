@@ -18,7 +18,7 @@ print(ar1 - ar2)
 print(ar3 - ar2)
 def sigmoid(x):
     return(1 / (1 + np.exp(-x)))
-
+#test
 print(sigmoid(25))
 def analyse(io_array):
     for i in io_array:
