@@ -22,3 +22,5 @@ while len(ah) == 0:
         ah = test(alfa[count1 + 1])
     except:
          print(ah)
+
+zero = 0
