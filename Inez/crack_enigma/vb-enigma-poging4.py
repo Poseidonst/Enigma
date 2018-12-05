@@ -103,41 +103,17 @@ JA = []
 woord = input("Geef een letter: ")
 
 pos1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-pos2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-pos3 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+
 for x in pos1:
-    count1 = 0
+    count1 = x
     count2 = 0
-    count3 = x
-
+    count3 = 0
+    
     while count1 < 26 and count2 < 26 and count3 < 26:
-        if 1 == 1: #(x,x,x)
-            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
-                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-            else:
-                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
-                #print(JA)
-            count1 += 1
-            count2 += 1
-
-        elif 2 == 2: #(x,x,0-25)
-            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
-                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-            else:
-                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
-                #print(JA)
-            count1 += 1
-
-        elif 3 == 3: #(x,x,0-25)
-            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
-                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-            else:
-                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
-                #print(JA)
-            count2 += 1
+        if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
+            NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
         else:
-            break
-
+            JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
 
 print(JA)
 
