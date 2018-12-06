@@ -100,37 +100,39 @@ test = enigma("B", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction)
 GW = "F"
 NEE = [ ]
 JA = []
-input = input("Geef een letter: ")
 woord = []
+input = input("Geef een letter: ")
 
-count1 = 0
-count2 = 0
-count3 = 0
-countertip = 25
+def counter(count1, count2, count3):
 
-for i in input:
-    print(i)
-    while count3 < 26:
-        count1 = count1 % 26
-        count2 = count2 % 26
-        count3 = count3 % 26
+    def ML(i, count1, count2, count3):
+        #while count3 < 26:
+        countertip = 25
+        print(i)
         if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
             NEE.append("nee" + str(count1) + " " + enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
             if count1 == countertip:
                 count2 += 1
             elif count2 == countertip:
                 count3 += 1
-            count1 += 1
+                count1 += 1
         else:
             JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
             if count1 == countertip:
                 count2 += 1
             elif count2 == countertip:
                 count3 += 1
-            count1 += 1
+                count1 += 1
+        print(JA)
+        return(count1)
+        return(count2)
+        return(count3)
 
-    print(JA)
-
+    for x in input:
+        ML(x, count1, count2, count3)
+    return
+    
+counter(0,0,0)
 #meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
 
 
