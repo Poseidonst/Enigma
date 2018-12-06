@@ -102,23 +102,37 @@ NEE = [ ]
 JA = []
 woord = input("Geef een letter: ")
 
-pos1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 
-for x in pos1:
-    count1 = x
-    count2 = 0
-    count3 = 0
-    
-    while count1 < 26 and count2 < 26 and count3 < 26:
-        if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
-            NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-        else:
-            JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
+count1 = 0
+count2 = 0
+count3 = 0
+countertip = 25
+
+while count3 < 26:
+    count1 = count1 % 26
+    count2 = count2 % 26
+    count3 = count3 % 26
+    if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
+        NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
+        if count1 == countertip:
+            count2 += 1
+        elif count2 == countertip:
+            count3 += 1
+        count1 += 1
+    else:
+        JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
+        if count1 == countertip:
+            count2 += 1
+        elif count2 == countertip:
+            count3 += 1
+        count1 += 1
 
 print(JA)
 
+#meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
 
 
 
 
-print(enigma("R", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 3, plugdiction))
+
+print(enigma(woord, rotorI, rotorII, rotorIII, reflectorB, 3, 0, 0, plugdiction))
