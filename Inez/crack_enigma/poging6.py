@@ -145,11 +145,12 @@ for i in input:
         l.append(Nfirst)
     print(woord)
     print(l)
+
+
     #print(len(n))
     #for x in range(0, len(n) / 9):
         #l.append(n[x:x + 8:1])
         #print(l)
-
 
 
 #meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
