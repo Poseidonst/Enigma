@@ -96,8 +96,8 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 
 test = enigma("B", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction)
 
-
-GW = "WETTERBERICHT"
+l0 = []
+GW = "WETTERBERICHT" #MVAEDUWHFAVPD(0,0,0)
 NEE = [ ]
 JA = []
 input = input("Geef een letter: ")
@@ -124,8 +124,11 @@ for i in input:
                 count3 += 1
             count1 += 1
         else:
-            n = n + ("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
-            if count1 == countertip:
+            l0.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
+            if count3 == 0:
+                l0.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
+                l0.append(count1, count2, count3)
+            elif count1 == countertip:
                 count2 += 1
             elif count2 == countertip:
                 count3 += 1
@@ -143,7 +146,9 @@ for i in input:
         l.remove(last)
         l.append(Nlast)
         l.append(Nfirst)
-    print(woord)
+
+    print(l0)
+    #print(woord)
     print(l)
 
 
