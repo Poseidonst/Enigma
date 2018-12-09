@@ -11,7 +11,7 @@ def ML(runner):
 input = input("Zeg iets: ")
 for i in input:
     ML(i)
-    
+
 list = [0]
 def counter(C1, C2, C3):
     count1 = C1
