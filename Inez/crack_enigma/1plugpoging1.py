@@ -87,31 +87,32 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
     return(output)
 
-
-        #rotor1.position = (rotor1.position + 1) % 26 #na elke letter die door de enigma gaat verschuift rotor1, 1 stap
-        #if rotor1.position == rotor1.rotortip:
-            #rotor2.position = (rotor2.position + 1) % 26 #als rotor1 de rotortip heeft bereikt verschuift rotor2 1 stap
-        #if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
-            #rotor3.position = (rotor3.position + 1) % 26 #als rotor2 verschuift en dan op zijn rotortip komt verschuift rotor3 1 stap
-
-    return(output)
-
 rotorI = RotorClass([alphabet_dict[i] for i in "EKMFLGDQVZNTOWYHXUSPAIBRCJ"], [20, 22, 24, 6, 0, 3, 5, 15, 21, 25, 1, 4, 2, 10, 12, 19, 7, 23, 18, 11, 17, 8, 13, 16, 14, 9], 0, 17)
 rotorII = RotorClass([alphabet_dict[i] for i in "AJDKSIRUXBLHWTMCQGZNPYFVOE"], [0, 9, 15, 2, 25, 22, 17, 11, 5, 1, 3, 10, 14, 19, 24, 20, 16, 6, 4, 13, 7, 23, 12, 8, 21, 18], 0, 5)
 rotorIII = RotorClass([alphabet_dict[i] for i in "BDFHJLCPRTXVZNYEIWGAKMUSQO"], [19, 0, 6, 1, 15, 2, 18, 3, 16, 4, 20, 5, 21, 13, 25, 7, 24, 8, 23, 9, 22, 11, 17, 10, 14, 12], 0, 22)
 reflectorB = ReflectorClass([alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJAT"])
 reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNMHL"])
-#de dictionaries voor de rotors en reflector waar i doorheen gaat; de volgorde wordt ligt niet vast.
 
-test = enigma("B", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction)
-print(enigma("MMUPYUXHCZOID", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
+#hier begint crack_enigma:
 
+listname = []
+alfalist = [i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+for i in range(0, 26):
+    for j in alfalist[i:]:
+        listname.append(alfalist[i] + j)
+for n in listname:
+    if n[0] == n[1]:
+        listname.remove(n)
+
+print(listname)
+
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 GW = "WETTERBERICHT" #MVAEDUWHFAVPD(0,0,0)
 NEE = [ ]
 JA = []
 input = input("Geef een letter: ")
+
 for i in input:
-    GL = GW[input.index(i)]
     Lijst_eerste = []
     if input.index(i) == 0:
         count1 = 0
@@ -122,7 +123,7 @@ for i in input:
              count1 = count1 % 26
              count2 = count2 % 26
              count3 = count3 % 26
-             if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GL:
+             if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GW[0]:
                  Lijst_eerste.append(str(count1) + "," + str(count2) + "," + str(count3))
                  if count1 == countertip:
                      count2 += 1
@@ -136,7 +137,7 @@ for i in input:
 
              count1 += 1
         WEL = []
-        print(Lijst_eerste)
+        #print(Lijst_eerste)
         for n in Lijst_eerste:
             #print(n)
             if n[1] == ",":
@@ -174,9 +175,9 @@ for i in input:
             # print(count1)
             # print(count2)
             # print(count3)
-            if enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, count1 + 1, count2, count3, plugdiction) == GW[1] or enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, count1 + 1, count2 + 1, count3, plugdiction) == GW[1]:
+            if enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, count2, count3, plugdiction) == GW[1] or enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[1]:
                  WEL.append(n)
-        print(WEL)
+        #print(WEL)
         WEL2 = []
         for n in WEL:
             if n[1] == ",":
@@ -214,72 +215,48 @@ for i in input:
             # print(count1)
             # print(count2)
             # print(count3)
-            if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, count1 + 2, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, count1 + 2, count2 + 2, count3, plugdiction) == GW[2]:
+            if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, (count2 + 2) % 26, count3, plugdiction) == GW[2]:
                  WEL2.append(n)
-        print(WEL2)
+        #print(WEL2)
+
+        WEL3 = []
+        for n in WEL2:
+            if n[1] == ",":
+                count1 = n[0]
+                if n[3] == ",":
+                    count2 = n[2]
+                    if len(n) == 5:
+                        count3 = n[4]
+                    else:
+                        count3 = n[4:6]
+                elif n[4] == ",":
+                    count2 = n[2:4]
+                    if len(n) == 6:
+                        count3 = n[5]
+                    else:
+                        count3 = n[5:7]
+
+            elif n[2] == ",":
+                count1 = n[0:2]
+                if n[4] == ",":
+                    count2 = n[3]
+                    if len(n) == 6:
+                        count3 = n[5]
+                    else:
+                        count3 = n[5:7]
+                elif n[5] == ",":
+                    count2 = n[3:5]
+                    if len(n) == 7:
+                        count3 = n[6]
+                    else:
+                        count3 = n[6:8]
+            count1 = int(count1)
+            count2 = int(count2)
+            count3 = int(count3)
+            # print(count1)
+            # print(count2)
+            # print(count3)
+            if enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, count2, count3, plugdiction) == GW[3] or enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, (count2 + 3) % 26, count3, plugdiction) == GW[3]:
+                 WEL3.append(n)
+        print(WEL3)
         #print(Lijst_eerste)
-
-
-
-
-
-
-
-    # woord = i
-    # n = ""
-    # l = []
-    # GL = GW[input.index(i)]
-    # print(GL)
-    # count1 = 0
-    # count2 = 0
-    # count3 = 0
-    # countertip = 25
-    #
-    # while count3 < 26:
-    #     count1 = count1 % 26
-    #     count2 = count2 % 26
-    #     count3 = count3 % 26
-    #     if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GL:
-    #         NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-    #         if count1 == countertip:
-    #             count2 += 1
-    #         elif count2 == countertip:
-    #             count3 += 1
-    #             count1 += 1
-    #         else:
-    #             n = n + ("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
-    #             if count1 == countertip:
-    #                 count2 += 1
-    #             elif count2 == countertip:
-    #                 count3 += 1
-    #                 count1 += 1
-    #
-    #                 #n = n + i
-    #                 l = n.split(")(")
-    #
-    #                 if len(l) > 4:
-    #                     first = l[0]
-    #                     Nfirst = first[1:len(first):]
-    #                     l.remove(first)
-    #                     last = l[-1]
-    #                     Nlast = last[0:len(last)-1:]
-    #                     l.remove(last)
-    #                     l.append(Nlast)
-    #                     l.append(Nfirst)
-    #
-    #                     print(woord)
-    #                     print(l)
-    #                     print(l)
-    #                     #print(len(n))
-    #                     #for x in range(0, len(n) / 9):
-    #                     #l.append(n[x:x + 8:1])
-    #                     #print(l)
-    #
-    #
-    #
-    #                     #meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
-    #
-    #
-    #
-    #
-    #

@@ -108,5 +108,6 @@ if __name__ == "__main__":
     #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
     #print(enigma("YBVZOOYXILIDRJSIIKJEMODTFGILWLKJDBNZMVTFYMNXCPTCILYBGQMSBXOMSCGQDENFDTKTUZQVKWDZQFXZTTDNLSSYMGDZEZDZ", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
 
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction))
+    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, plugdiction))
     #print het resultaat van de string "TURINGENIGMA" door de enigma halen met beginrotorsettings '1,2,3' en de rotors op volgorde II,I,III
+    print(enigma("TPPDKEFWXANMB", rotorI, rotorII, rotorIII, reflectorB, 11, 0, 0, plugdiction))
