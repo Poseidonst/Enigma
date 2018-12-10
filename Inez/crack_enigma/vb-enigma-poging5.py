@@ -102,62 +102,94 @@ NEE = [ ]
 JA = []
 input = input("Geef een letter: ")
 for i in input:
-    woord = i
-    n = ""
-    l = []
     GL = GW[input.index(i)]
-    print(GL)
-    count1 = 0
-    count2 = 0
-    count3 = 0
-    countertip = 25
+    Lijst_eerste = []
+    if input.index(i) == 0:
+        count1 = 0
+        count2 = 0
+        count3 = 0
+        countertip = 25
+        while count3 < 26:
+             count1 = count1 % 26
+             count2 = count2 % 26
+             count3 = count3 % 26
+             if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GL:
+                 Lijst_eerste.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
+                 if count1 == countertip:
+                     count2 += 1
+                 elif count2 == countertip:
+                     count3 += 1
+             else:
+                 if count1 == countertip:
+                     count2 += 1
+                 elif count2 == countertip:
+                     count3 += 1
 
-    while count3 < 26:
-        count1 = count1 % 26
-        count2 = count2 % 26
-        count3 = count3 % 26
-        if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GL:
-            NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
-            if count1 == countertip:
-                count2 += 1
-            elif count2 == countertip:
-                count3 += 1
-            count1 += 1
-        else:
-            n = n + ("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
-            if count1 == countertip:
-                count2 += 1
-            elif count2 == countertip:
-                count3 += 1
-            count1 += 1
-
-    #n = n + i
-    l = n.split(")(")
-
-    if len(l) > 4:
-        first = l[0]
-        Nfirst = first[1:len(first):]
-        l.remove(first)
-        last = l[-1]
-        Nlast = last[0:len(last)-1:]
-        l.remove(last)
-        l.append(Nlast)
-        l.append(Nfirst)
-
-    print(woord)
-    print(l)
-print(l)
-    #print(len(n))
-    #for x in range(0, len(n) / 9):
-        #l.append(n[x:x + 8:1])
-        #print(l)
-
-
-
-#meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
+             count1 += 1
+        print(Lijst_eerste)
 
 
 
 
 
-print(enigma(woord, rotorI, rotorII, rotorIII, reflectorB, 3, 0, 0, plugdiction))
+
+
+    # woord = i
+    # n = ""
+    # l = []
+    # GL = GW[input.index(i)]
+    # print(GL)
+    # count1 = 0
+    # count2 = 0
+    # count3 = 0
+    # countertip = 25
+    #
+    # while count3 < 26:
+    #     count1 = count1 % 26
+    #     count2 = count2 % 26
+    #     count3 = count3 % 26
+    #     if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GL:
+    #         NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
+    #         if count1 == countertip:
+    #             count2 += 1
+    #         elif count2 == countertip:
+    #             count3 += 1
+    #             count1 += 1
+    #         else:
+    #             n = n + ("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")" )
+    #             if count1 == countertip:
+    #                 count2 += 1
+    #             elif count2 == countertip:
+    #                 count3 += 1
+    #                 count1 += 1
+    #
+    #                 #n = n + i
+    #                 l = n.split(")(")
+    #
+    #                 if len(l) > 4:
+    #                     first = l[0]
+    #                     Nfirst = first[1:len(first):]
+    #                     l.remove(first)
+    #                     last = l[-1]
+    #                     Nlast = last[0:len(last)-1:]
+    #                     l.remove(last)
+    #                     l.append(Nlast)
+    #                     l.append(Nfirst)
+    #
+    #                     print(woord)
+    #                     print(l)
+    #                     print(l)
+    #                     #print(len(n))
+    #                     #for x in range(0, len(n) / 9):
+    #                     #l.append(n[x:x + 8:1])
+    #                     #print(l)
+    #
+    #
+    #
+    #                     #meerdere letters woord: if (count1, count2, count3) van letter 1 == (count1-1, count2, count3) van letter2 (of (count1-1, count2-2, count3))
+    #
+    #
+    #
+    #
+    #
+    #                     print(enigma(woord, rotorI, rotorII, rotorIII, reflectorB, 3, 0, 0, plugdiction))
