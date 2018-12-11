@@ -109,22 +109,26 @@ for i in input:
         while count3 < 26:
              count1 = count1 % 26
              count2 = count2 % 26
-             count3 = count3 % 26
+
              if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GW[0]:
                  Lijst_eerste.append(str(count1) + "," + str(count2) + "," + str(count3))
                  if count1 == countertip:
                      count2 += 1
                  elif count2 == countertip:
                      count3 += 1
+                     count2 = 0
+                 #print(count3)
+
              else:
                  if count1 == countertip:
                      count2 += 1
                  elif count2 == countertip:
                      count3 += 1
-
+                     count2 = 0
+             #print(count3)
              count1 += 1
         WEL = []
-        #print(Lijst_eerste)
+        print(Lijst_eerste)
         for n in Lijst_eerste:
             #print(n)
             if n[1] == ",":
@@ -164,7 +168,7 @@ for i in input:
             # print(count3)
             if enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, count2, count3, plugdiction) == GW[1] or enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[1]:
                  WEL.append(n)
-        #print(WEL)
+        print(WEL)
         WEL2 = []
         for n in WEL:
             if n[1] == ",":
@@ -202,9 +206,9 @@ for i in input:
             # print(count1)
             # print(count2)
             # print(count3)
-            if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, (count2 + 2) % 26, count3, plugdiction) == GW[2]:
+            if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[2]:
                  WEL2.append(n)
-        #print(WEL2)
+        print(WEL2)
 
         WEL3 = []
         for n in WEL2:
@@ -243,7 +247,48 @@ for i in input:
             # print(count1)
             # print(count2)
             # print(count3)
-            if enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, count2, count3, plugdiction) == GW[3] or enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, (count2 + 3) % 26, count3, plugdiction) == GW[3]:
+            if enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, count2, count3, plugdiction) == GW[3] or enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[3]:
                  WEL3.append(n)
         print(WEL3)
+
+        WEL4 = []
+        for n in WEL3:
+            if n[1] == ",":
+                count1 = n[0]
+                if n[3] == ",":
+                    count2 = n[2]
+                    if len(n) == 5:
+                        count3 = n[4]
+                    else:
+                        count3 = n[4:6]
+                elif n[4] == ",":
+                    count2 = n[2:4]
+                    if len(n) == 6:
+                        count3 = n[5]
+                    else:
+                        count3 = n[5:7]
+
+            elif n[2] == ",":
+                count1 = n[0:2]
+                if n[4] == ",":
+                    count2 = n[3]
+                    if len(n) == 6:
+                        count3 = n[5]
+                    else:
+                        count3 = n[5:7]
+                elif n[5] == ",":
+                    count2 = n[3:5]
+                    if len(n) == 7:
+                        count3 = n[6]
+                    else:
+                        count3 = n[6:8]
+            count1 = int(count1)
+            count2 = int(count2)
+            count3 = int(count3)
+            # print(count1)
+            # print(count2)
+            # print(count3)
+            if enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, count2, count3, plugdiction) == GW[4] or enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[4]:
+                 WEL4.append(n)
+        print(WEL4)
         #print(Lijst_eerste)
