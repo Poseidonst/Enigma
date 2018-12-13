@@ -20,6 +20,6 @@ for i in koppels: #JTOPUNAJUQNBE
         koppels_enkel.append(i)
     else:
         twee_loop.append(i + " " + i[::-1])
-        
+
 print(twee_loop)
 print(koppels_enkel)

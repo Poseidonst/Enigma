@@ -14,7 +14,7 @@ class RotorClass(object): #definieert de rotor
         self.position = position
         self.rotortip = rotortip
 
-plugdiction = {}
+plugdiction = { "K": "T"}
 
 emptydict = {}
 
@@ -94,4 +94,4 @@ reflectorB = ReflectorClass([alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJ
 reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNMHL"])
 #de dictionaries voor de rotors en reflector waar i doorheen gaat; de volgorde wordt ligt niet vast.
 
-print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction))
+print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 22, 18, 1, plugdiction))
