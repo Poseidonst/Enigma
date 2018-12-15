@@ -424,7 +424,46 @@ for plug in listname:
                 # print(count3)
                 if enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, count2, count3, plugdiction) == GW[7] or enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[7]:
                      WEL7.append(n)
-            if WEL7 != []:
-                print(WEL7)
+            WEL8 = []
+            for n in WEL7:
+                if n[1] == ",":
+                    count1 = n[0]
+                    if n[3] == ",":
+                        count2 = n[2]
+                        if len(n) == 5:
+                            count3 = n[4]
+                        else:
+                            count3 = n[4:6]
+                    elif n[4] == ",":
+                        count2 = n[2:4]
+                        if len(n) == 6:
+                            count3 = n[5]
+                        else:
+                            count3 = n[5:7]
+
+                elif n[2] == ",":
+                    count1 = n[0:2]
+                    if n[4] == ",":
+                        count2 = n[3]
+                        if len(n) == 6:
+                            count3 = n[5]
+                        else:
+                            count3 = n[5:7]
+                    elif n[5] == ",":
+                        count2 = n[3:5]
+                        if len(n) == 7:
+                            count3 = n[6]
+                        else:
+                            count3 = n[6:8]
+                count1 = int(count1)
+                count2 = int(count2)
+                count3 = int(count3)
+                # print(count1)
+                # print(count2)
+                # print(count3)
+                if enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, count2, count3, plugdiction) == GW[8] or enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[8]:
+                     WEL8.append(n)
+            if WEL8 != []:
+                print(WEL8)
                 print(plug)
             #print(Lijst_eerste)

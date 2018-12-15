@@ -429,8 +429,11 @@ for plug in listname:
                  print(plug)
 
                  for plug2 in listname:
-                     plugdiction2 = { plug2[0] : plug2[1],
-                                    plug2[1] : plug2[0]}
+                     plugdiction2 = { plug[0] : plug[1],
+                                      plug[1] : plug[0],
+                                      plug2[0] : plug2[1],
+                                      plug2[1] : plug2[0]}
+                    print(plugdiction2)
 
                      for i in input:
                          Lijst_eerste = []
