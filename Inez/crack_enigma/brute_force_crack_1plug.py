@@ -95,375 +95,369 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 
 #hier begint crack_enigma:
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-GW = "WETTERBERICHT" #MVAEDUWHFAVPD(0,0,0)
+#GW = "WETTERBERICHT" #MVAEDUWHFAVPD(0,0,0)
 NEE = [ ]
 JA = []
-input = input("Geef een letter: ")
-listname = []
-alfalist = [i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
-for i in range(0, 26):
-    for j in alfalist[i:]:
-        listname.append(alfalist[i] + j)
-for n in listname:
-    if n[0] == n[1]:
-        listname.remove(n)
+# input = input("Geef een letter: ")
+listname = ['AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CD', 'CE', 'CF', 'CG', 'CH', 'CI', 'CJ', 'CK', 'CL', 'CM', 'CN', 'CO', 'CP', 'CQ', 'CR', 'CS', 'CT', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DF', 'DG', 'DH', 'DI', 'DJ', 'DK', 'DL', 'DM', 'DN', 'DO', 'DP', 'DQ', 'DR', 'DS', 'DT', 'DU', 'DV', 'DW', 'DX', 'DY', 'DZ', 'EF', 'EG', 'EH', 'EI', 'EJ', 'EK', 'EL', 'EM', 'EN', 'EO', 'EP', 'EQ', 'ER', 'ES', 'ET', 'EU', 'EV', 'EW', 'EX', 'EY', 'EZ', 'FG', 'FH', 'FI', 'FJ', 'FK', 'FL', 'FM', 'FN', 'FO', 'FP', 'FQ', 'FR', 'FS', 'FT', 'FU', 'FV', 'FW', 'FX', 'FY', 'FZ', 'GH', 'GI', 'GJ', 'GK', 'GL', 'GM', 'GN', 'GO', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GV', 'GW', 'GX', 'GY', 'GZ', 'HI', 'HJ', 'HK', 'HL', 'HM', 'HN', 'HO', 'HP', 'HQ', 'HR', 'HS', 'HT', 'HU', 'HV', 'HW', 'HX', 'HY', 'HZ', 'IJ', 'IK', 'IL', 'IM', 'IN', 'IO', 'IP', 'IQ', 'IR', 'IS', 'IT', 'IU', 'IV', 'IW', 'IX', 'IY', 'IZ', 'JK', 'JL', 'JM', 'JN', 'JO', 'JP', 'JQ', 'JR', 'JS', 'JT', 'JU', 'JV', 'JW', 'JX', 'JY', 'JZ', 'KL', 'KM', 'KN', 'KO', 'KP', 'KQ', 'KR', 'KS', 'KT', 'KU', 'KV', 'KW', 'KX', 'KY', 'KZ', 'LM', 'LN', 'LO', 'LP', 'LQ', 'LR', 'LS', 'LT', 'LU', 'LV', 'LW', 'LX', 'LY', 'LZ', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NO', 'NP', 'NQ', 'NR', 'NS', 'NT', 'NU', 'NV', 'NW', 'NX', 'NY', 'NZ', 'OP', 'OQ', 'OR', 'OS', 'OT', 'OU', 'OV', 'OW', 'OX', 'OY', 'OZ', 'PQ', 'PR', 'PS', 'PT', 'PU', 'PV', 'PW', 'PX', 'PY', 'PZ', 'QR', 'QS', 'QT', 'QU', 'QV', 'QW', 'QX', 'QY', 'QZ', 'RS', 'RT', 'RU', 'RV', 'RW', 'RX', 'RY', 'RZ', 'ST', 'SU', 'SV', 'SW', 'SX', 'SY', 'SZ', 'TU', 'TV', 'TW', 'TX', 'TY', 'TZ', 'UV', 'UW', 'UX', 'UY', 'UZ', 'VW', 'VX', 'VY', 'VZ', 'WX', 'WY', 'WZ', 'XY', 'XZ', 'YZ']
 
-print(listname)
 
-for plug in listname:
-    plugdiction = { plug[0] : plug[1],
-                    plug[1] : plug[0]}
-    #print(plugdiction)
+def crack_enigma(input, GW):
+    for plug in listname:
+        plugdiction = { plug[0] : plug[1],
+                        plug[1] : plug[0]}
+        #print(plugdiction)
 
-    for i in input:
-        Lijst_eerste = []
-        if input.index(i) == 0:
-            count1 = 0
-            count2 = 0
-            count3 = 0
-            countertip = 25
-            while count3 < 26:
-                 count1 = count1 % 26
-                 count2 = count2 % 26
+        for i in input:
+            Lijst_eerste = []
+            if input.index(i) == 0:
+                count1 = 0
+                count2 = 0
+                count3 = 0
+                countertip = 25
+                while count3 < 26:
+                     count1 = count1 % 26
+                     count2 = count2 % 26
 
-                 if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GW[0]:
-                     Lijst_eerste.append(str(count1) + "," + str(count2) + "," + str(count3))
-                     if count1 == countertip:
-                         count2 += 1
-                     elif count2 == countertip:
-                         count3 += 1
-                         count2 = 0
+                     if enigma(i, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) == GW[0]:
+                         Lijst_eerste.append(str(count1) + "," + str(count2) + "," + str(count3))
+                         if count1 == countertip:
+                             count2 += 1
+                         elif count2 == countertip:
+                             count3 += 1
+                             count2 = 0
+                         #print(count3)
+
+                     else:
+                         if count1 == countertip:
+                             count2 += 1
+                         elif count2 == countertip:
+                             count3 += 1
+                             count2 = 0
                      #print(count3)
+                     count1 += 1
+                WEL = []
+                #print(Lijst_eerste)
+                for n in Lijst_eerste:
+                    #print(n)
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-                 else:
-                     if count1 == countertip:
-                         count2 += 1
-                     elif count2 == countertip:
-                         count3 += 1
-                         count2 = 0
-                 #print(count3)
-                 count1 += 1
-            WEL = []
-            #print(Lijst_eerste)
-            for n in Lijst_eerste:
-                #print(n)
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, count2, count3, plugdiction) == GW[1] or enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[1]:
+                         WEL.append(n)
+                #print(WEL)
+                WEL2 = []
+                for n in WEL:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, count2, count3, plugdiction) == GW[1] or enigma(input[1], rotorI, rotorII, rotorIII, reflectorB, (count1 + 1) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[1]:
-                     WEL.append(n)
-            #print(WEL)
-            WEL2 = []
-            for n in WEL:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[2]:
+                         WEL2.append(n)
+                #print(WEL2)
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, count2, count3, plugdiction) == GW[2] or enigma(input[2], rotorI, rotorII, rotorIII, reflectorB, (count1 + 2) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[2]:
-                     WEL2.append(n)
-            #print(WEL2)
+                WEL3 = []
+                for n in WEL2:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-            WEL3 = []
-            for n in WEL2:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, count2, count3, plugdiction) == GW[3] or enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[3]:
+                         WEL3.append(n)
+                #print(WEL3)
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, count2, count3, plugdiction) == GW[3] or enigma(input[3], rotorI, rotorII, rotorIII, reflectorB, (count1 + 3) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[3]:
-                     WEL3.append(n)
-            #print(WEL3)
+                WEL4 = []
+                for n in WEL3:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-            WEL4 = []
-            for n in WEL3:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, count2, count3, plugdiction) == GW[4] or enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[4]:
+                         WEL4.append(n)
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, count2, count3, plugdiction) == GW[4] or enigma(input[4], rotorI, rotorII, rotorIII, reflectorB, (count1 + 4) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[4]:
-                     WEL4.append(n)
+                WEL5 = []
+                for n in WEL4:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-            WEL5 = []
-            for n in WEL4:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[5], rotorI, rotorII, rotorIII, reflectorB, (count1 + 5) % 26, count2, count3, plugdiction) == GW[5] or enigma(input[5], rotorI, rotorII, rotorIII, reflectorB, (count1 + 5) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[5]:
+                         WEL5.append(n)
+                WEL6 = []
+                for n in WEL5:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[5], rotorI, rotorII, rotorIII, reflectorB, (count1 + 5) % 26, count2, count3, plugdiction) == GW[5] or enigma(input[5], rotorI, rotorII, rotorIII, reflectorB, (count1 + 5) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[5]:
-                     WEL5.append(n)
-            WEL6 = []
-            for n in WEL5:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[6], rotorI, rotorII, rotorIII, reflectorB, (count1 + 6) % 26, count2, count3, plugdiction) == GW[6] or enigma(input[6], rotorI, rotorII, rotorIII, reflectorB, (count1 + 6) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[6]:
+                         WEL6.append(n)
+                WEL7 = []
+                for n in WEL6:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[6], rotorI, rotorII, rotorIII, reflectorB, (count1 + 6) % 26, count2, count3, plugdiction) == GW[6] or enigma(input[6], rotorI, rotorII, rotorIII, reflectorB, (count1 + 6) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[6]:
-                     WEL6.append(n)
-            WEL7 = []
-            for n in WEL6:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, count2, count3, plugdiction) == GW[7] or enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[7]:
+                         WEL7.append(n)
+                WEL8 = []
+                for n in WEL7:
+                    if n[1] == ",":
+                        count1 = n[0]
+                        if n[3] == ",":
+                            count2 = n[2]
+                            if len(n) == 5:
+                                count3 = n[4]
+                            else:
+                                count3 = n[4:6]
+                        elif n[4] == ",":
+                            count2 = n[2:4]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, count2, count3, plugdiction) == GW[7] or enigma(input[7], rotorI, rotorII, rotorIII, reflectorB, (count1 + 7) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[7]:
-                     WEL7.append(n)
-            WEL8 = []
-            for n in WEL7:
-                if n[1] == ",":
-                    count1 = n[0]
-                    if n[3] == ",":
-                        count2 = n[2]
-                        if len(n) == 5:
-                            count3 = n[4]
-                        else:
-                            count3 = n[4:6]
-                    elif n[4] == ",":
-                        count2 = n[2:4]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
+                    elif n[2] == ",":
+                        count1 = n[0:2]
+                        if n[4] == ",":
+                            count2 = n[3]
+                            if len(n) == 6:
+                                count3 = n[5]
+                            else:
+                                count3 = n[5:7]
+                        elif n[5] == ",":
+                            count2 = n[3:5]
+                            if len(n) == 7:
+                                count3 = n[6]
+                            else:
+                                count3 = n[6:8]
+                    count1 = int(count1)
+                    count2 = int(count2)
+                    count3 = int(count3)
+                    # print(count1)
+                    # print(count2)
+                    # print(count3)
+                    if enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, count2, count3, plugdiction) == GW[8] or enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[8]:
+                         WEL8.append(n)
+                if WEL8 != []:
+                    print(WEL8)
+                    print(plug)
 
-                elif n[2] == ",":
-                    count1 = n[0:2]
-                    if n[4] == ",":
-                        count2 = n[3]
-                        if len(n) == 6:
-                            count3 = n[5]
-                        else:
-                            count3 = n[5:7]
-                    elif n[5] == ",":
-                        count2 = n[3:5]
-                        if len(n) == 7:
-                            count3 = n[6]
-                        else:
-                            count3 = n[6:8]
-                count1 = int(count1)
-                count2 = int(count2)
-                count3 = int(count3)
-                # print(count1)
-                # print(count2)
-                # print(count3)
-                if enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, count2, count3, plugdiction) == GW[8] or enigma(input[8], rotorI, rotorII, rotorIII, reflectorB, (count1 + 8) % 26, (count2 + 1) % 26, count3, plugdiction) == GW[8]:
-                     WEL8.append(n)
-            if WEL8 != []:
-                print(WEL8)
-                print(plug)
-            #print(Lijst_eerste)
+print(crack_enigma("CQACPIPULSTMM", "WETTERBERICHT"))

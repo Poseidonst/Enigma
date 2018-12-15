@@ -111,6 +111,7 @@ for n in listname:
 print(listname)
 for plug2 in listname:
     for plug in listname:
+        print(plug + ' ' + plug2)
         if plug[0] != plug2[0] and plug[0] != plug2[1] and plug[1] != plug2[0] and plug[1] != plug2[1]:
             plugdiction = { plug2[0] : plug2[1], plug2[1] : plug2[0],
                             plug[0] : plug[1], plug[1] : plug[0]}
