@@ -94,6 +94,11 @@ reflectorB = ReflectorClass([alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJ
 reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNMHL"])
 
 #hier begint crack_enigma:
+import numpy as np
+import numba
+from numba import jit
+
+
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 #GW = "WETTERBERICHT" #MVAEDUWHFAVPD(0,0,0)
 NEE = [ ]
@@ -103,6 +108,7 @@ listname = ['AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'A
 
 
 def crack_enigma(input, GW):
+    %timeit crack_enigma(input,GW)
     for plug in listname:
         plugdiction = { plug[0] : plug[1],
                         plug[1] : plug[0]}
