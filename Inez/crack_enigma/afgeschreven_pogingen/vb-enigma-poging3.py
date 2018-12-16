@@ -14,22 +14,8 @@ class RotorClass(object): #definieert de rotor
         self.position = position
         self.rotortip = rotortip
 
-plugdiction = {"A" : "Z", "Z" : "A",
-               "B" : "T", "T" : "B",
-               "C" : "F", "F" : "C",
-               "D" : "G", "G" : "D",
-               "E" : "H", "H" : "E",}
+plugdiction = {}
 
-plugdiction2 = {"A" : "Z", "Z" : "A",
-               "B" : "T", "T" : "B",
-               "C" : "F", "F" : "C",
-               "D" : "G", "G" : "D",
-               "E" : "H", "H" : "E",
-               "I" : "N", "N" : "I",
-               "J" : "O", "O" : "J",
-               "K" : "P", "P" : "K",
-               "L" : "Q", "Q" : "L",
-               "M" : "R", "R" : "M",}
 emptydict = {}
 
 def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3, plugdictionary):
@@ -93,11 +79,11 @@ def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorset
 
         output += i
 
-        rotor1.position = (rotor1.position + 1) % 26 #na elke letter die door de enigma gaat verschuift rotor1, 1 stap
-        if rotor1.position == rotor1.rotortip:
-            rotor2.position = (rotor2.position + 1) % 26 #als rotor1 de rotortip heeft bereikt verschuift rotor2 1 stap
-        if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
-            rotor3.position = (rotor3.position + 1) % 26 #als rotor2 verschuift en dan op zijn rotortip komt verschuift rotor3 1 stap
+        #rotor1.position = (rotor1.position + 1) % 26 #na elke letter die door de enigma gaat verschuift rotor1, 1 stap
+        #if rotor1.position == rotor1.rotortip:
+            #rotor2.position = (rotor2.position + 1) % 26 #als rotor1 de rotortip heeft bereikt verschuift rotor2 1 stap
+        #if rotor1.position == rotor1.rotortip and rotor2.position == rotor2.rotortip:
+            #rotor3.position = (rotor3.position + 1) % 26 #als rotor2 verschuift en dan op zijn rotortip komt verschuift rotor3 1 stap
 
     return(output)
 
@@ -108,20 +94,55 @@ reflectorB = ReflectorClass([alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJ
 reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNMHL"])
 #de dictionaries voor de rotors en reflector waar i doorheen gaat; de volgorde wordt ligt niet vast.
 
-if __name__ == "__main__":
-    # for i in range(0, 26):
-    #     for j in range(0, 26):
-    #         for k in range(0, 26):
-    #             enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k, plugdiction)
+test = enigma("B", rotorI, rotorII, rotorIII, reflectorB, 1, 2, 3, plugdiction)
 
-    #print(enigma("A"*100, rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
-    #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
-<<<<<<< HEAD
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 10, 11, plugdiction2))
-=======
-    #print(enigma("YBVZOOYXILIDRJSIIKJEMODTFGILWLKJDBNZMVTFYMNXCPTCILYBGQMSBXOMSCGQDENFDTKTUZQVKWDZQFXZTTDNLSSYMGDZEZDZ", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
->>>>>>> f58c80f235b18ea92b9b1f5834f03ef6950819c0
 
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, plugdiction))
-    #print het resultaat van de string "TURINGENIGMA" door de enigma halen met beginrotorsettings '1,2,3' en de rotors op volgorde II,I,III
-    print(enigma("TPPDKEFWXANMB", rotorI, rotorII, rotorIII, reflectorB, 11, 0, 0, plugdiction))
+GW = "F"
+NEE = [ ]
+JA = []
+woord = input("Geef een letter: ")
+
+pos1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+pos2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+pos3 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+for x in pos1:
+    count1 = 0
+    count2 = 0
+    count3 = x
+
+    while count1 < 26 and count2 < 26 and count3 < 26:
+        if 1 == 1: #(x,x,x)
+            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
+                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
+            else:
+                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
+                #print(JA)
+            count1 += 1
+            count2 += 1
+
+        elif 2 == 2: #(x,x,0-25)
+            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
+                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
+            else:
+                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
+                #print(JA)
+            count1 += 1
+
+        elif 3 == 3: #(x,x,0-25)
+            if enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction) != GW:
+                NEE.append("nee" + str(count1) + " " + enigma(woord, rotorI, rotorII, rotorIII, reflectorB, count1, count2, count3, plugdiction))
+            else:
+                JA.append("(" + str(count1) + "," + str(count2) + "," + str(count3) + ")")
+                #print(JA)
+            count2 += 1
+        else:
+            break
+
+
+print(JA)
+
+
+
+
+
+print(enigma("R", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 3, plugdiction))

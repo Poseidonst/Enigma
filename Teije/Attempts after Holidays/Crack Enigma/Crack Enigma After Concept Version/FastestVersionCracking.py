@@ -379,20 +379,4 @@ def CrackMulti(message, cipher):
     process9.start()
 
 if __name__ == "__main__":
-    #print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 12,10,10, plugdiction2))
     CrackMulti("WETTERBERICHT", "RRUKYCXHVWJND")
-    # print(freq("WETTERBERICHT", "SCXBJPJADCMOM"))
-    # CrackLoop("WETTERBERICHT", "TWDCOAUUOOEDF")
-    # for i in range(26):
-    #     for k in range(26):
-    #         Crack("WETTERBERICHT", "RRUKYCXHVWJND", i, k, 0)):
-
-
-    # Crack("WETTERBERICHT", "MMUPYUXHCZOID", 0, 0, 0)
-    # for i in range(26):
-    #     for j in range(26):
-    #         for k in range(26):
-    #             Crack("WETTERBERICHT", "SCXBJPJADCMOM", i, j, k)
-    #             print(i, j, k)
-                # print(time.time() - start)
-    # print(analyse(['EM', 'RH', "EM"], ['EM', 'RH'], []))

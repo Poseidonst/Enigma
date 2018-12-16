@@ -14,22 +14,8 @@ class RotorClass(object): #definieert de rotor
         self.position = position
         self.rotortip = rotortip
 
-plugdiction = {"A" : "Z", "Z" : "A",
-               "B" : "T", "T" : "B",
-               "C" : "F", "F" : "C",
-               "D" : "G", "G" : "D",
-               "E" : "H", "H" : "E",}
+plugdiction = { "K": "T"}
 
-plugdiction2 = {"A" : "Z", "Z" : "A",
-               "B" : "T", "T" : "B",
-               "C" : "F", "F" : "C",
-               "D" : "G", "G" : "D",
-               "E" : "H", "H" : "E",
-               "I" : "N", "N" : "I",
-               "J" : "O", "O" : "J",
-               "K" : "P", "P" : "K",
-               "L" : "Q", "Q" : "L",
-               "M" : "R", "R" : "M",}
 emptydict = {}
 
 def enigma(userinput, rotor1, rotor2, rotor3, reflector, rotorsetting1, rotorsetting2, rotorsetting3, plugdictionary):
@@ -108,20 +94,4 @@ reflectorB = ReflectorClass([alphabet_dict[i] for i in "YRUHQSLDPXNGOKMIEBFZCWVJ
 reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNMHL"])
 #de dictionaries voor de rotors en reflector waar i doorheen gaat; de volgorde wordt ligt niet vast.
 
-if __name__ == "__main__":
-    # for i in range(0, 26):
-    #     for j in range(0, 26):
-    #         for k in range(0, 26):
-    #             enigma("A" * 100, rotorI, rotorII, rotorIII, reflectorB, i, j, k, plugdiction)
-
-    #print(enigma("A"*100, rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
-    #print het resultaat van honderd keer de letter A door de enigma halen met beginrotorsettings '0,0,0' en de rotors op volgorde I,II,III
-<<<<<<< HEAD
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 0, 10, 11, plugdiction2))
-=======
-    #print(enigma("YBVZOOYXILIDRJSIIKJEMODTFGILWLKJDBNZMVTFYMNXCPTCILYBGQMSBXOMSCGQDENFDTKTUZQVKWDZQFXZTTDNLSSYMGDZEZDZ", rotorI, rotorII, rotorIII, reflectorB, 0, 0, 0, plugdiction))
->>>>>>> f58c80f235b18ea92b9b1f5834f03ef6950819c0
-
-    print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, plugdiction))
-    #print het resultaat van de string "TURINGENIGMA" door de enigma halen met beginrotorsettings '1,2,3' en de rotors op volgorde II,I,III
-    print(enigma("TPPDKEFWXANMB", rotorI, rotorII, rotorIII, reflectorB, 11, 0, 0, plugdiction))
+print(enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 22, 18, 1, plugdiction))
