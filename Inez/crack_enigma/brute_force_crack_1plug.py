@@ -108,7 +108,6 @@ listname = ['AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'A
 
 
 def crack_enigma(input, GW):
-    %timeit crack_enigma(input,GW)
     for plug in listname:
         plugdiction = { plug[0] : plug[1],
                         plug[1] : plug[0]}
