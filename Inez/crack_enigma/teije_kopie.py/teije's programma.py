@@ -182,7 +182,7 @@ def analyse(input1, input2):
 
 def takeSecond(elem):
     return elem[1]
-
+#=============================================================================================
 def loop(end_list, msg, ciph, c1, c2, c3, start_pos):
     if len(end_list) == 12:
         for i in end_list[0]:
@@ -457,7 +457,7 @@ def loop(end_list, msg, ciph, c1, c2, c3, start_pos):
                                     print(outcome[1], start_pos)
     if len(end_list) <= 3:
         print("The message is too short, we cannot decipher this", len(end_list))
-
+#========================================================================================
 def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
     for c1 in range(v1, v2):
         for c2 in range(26):
@@ -500,6 +500,7 @@ def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
                 loop(end_list, msg, ciph, start_pos[0],start_pos[1],start_pos[2], start_pos)
         print("Done")
 
+#===========================================================================================================
 def Crack(msg, ciph):
     msg = msg.upper()
     ciph = ciph.upper()
@@ -613,6 +614,8 @@ def Crack(msg, ciph):
     process8.start()
     process9.start()
 
-
+#===================================================================================================================================
 if __name__ == "__main__":
-    Crack("WETTERBERICHT", enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 15, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ",])))
+    #Crack("WETTERBERICHT", enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 15, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ",])))
+
+    Crack("WETTERBERICHT", "NNGNOGNXBVNLX")

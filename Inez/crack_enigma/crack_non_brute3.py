@@ -596,27 +596,8 @@ def cracking_enigma(code, origineel, count1, count2, count3):
                 elif x[::-1]==i:
                     accept_list.remove(i)
 
-        #print(len(accept_list))
-        #print(accept_list)
         reverse_accept_list = accept_list[::-1]
-        #print(reverse_accept_list)
 
-        # eind_lijst = []
-        #
-        # for p in reverse_accept_list:
-        #     gekoppelde_letters = []
-        #     for j in gekoppelde_letters:
-        #         print(i)
-        #
-        #         if p[0] != j and p[1] != j:
-        #             gekoppelde_letters.append(p[0])
-        #             gekoppelde_letters.append(p[1])
-        #             eind_lijst.append(i)
-        #         print(gekoppelde_letters)
-        #
-        #         return
-        #
-        # print(eind_lijst)
 foutlijst_uit = []
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 for i in alphabet:
