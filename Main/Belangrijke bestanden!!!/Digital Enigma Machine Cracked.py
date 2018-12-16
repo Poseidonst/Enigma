@@ -139,8 +139,12 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 
 #------------------------------------- Het kraken van de enigmamachine begint hieronder ---------------------------------------------------#
 
+"""
+Rotator is een functie die buiten de enigma functie de rotors kan laten draaien.
+Dit is vooral belangrijk voor later gebruik in het programma.
+"""
 
-def Rotator(pos1, pos2, pos3, amount): #Functie die los van de enigma machine functie de rotorposities kan bepalen
+def Rotator(pos1, pos2, pos3, amount):
     counter = 0
     while counter != amount:
         pos1 = (pos1 + 1) % 26
@@ -151,6 +155,10 @@ def Rotator(pos1, pos2, pos3, amount): #Functie die los van de enigma machine fu
         counter += 1
     outputlist = [pos1, pos2, pos3]
     return(outputlist)
+
+"""
+DictionConvert is een functie die een lijst van schakelbordinstellingen om kan zetten in een bruikbare dictionary.
+"""
 
 def DictionConvert(list): #Functie die een lijst van losse schakelinstellingen om kan zetten in een bruikbare dictionary voor de enigmamachine
     diction = {}
