@@ -139,7 +139,11 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 
 #------------------------------------- Het kraken van de enigmamachine begint hieronder ---------------------------------------------------#
 
-#Functie die los van de enigma machine functie de rotorposities kan bepalen:
+"""
+Rotator is een functie die buiten de enigma functie de rotors kan laten draaien.
+Dit is vooral belangrijk voor later gebruik in het programma.
+"""
+
 def Rotator(pos1, pos2, pos3, amount):
     counter = 0
     while counter != amount:
@@ -152,13 +156,20 @@ def Rotator(pos1, pos2, pos3, amount):
     outputlist = [pos1, pos2, pos3]
     return(outputlist)
 
-#Functie die een lijst van losse schakelinstellingen om kan zetten in een bruikbare dictionary voor de enigmamachine:
+"""
+DictionConvert is een functie die een lijst van schakelbordinstellingen om kan zetten in een bruikbare dictionary.
+"""
+
 def DictionConvert(list):
     diction = {}
     for i in list:
         diction[i[0]] = i[1]
         diction[i[1]] = i[0]
     return(diction)
+
+"""
+
+"""
 
 def analyse(input1, input2):
     state = True
@@ -181,9 +192,17 @@ def analyse(input1, input2):
 
     return(state, output)
 
+
+"""
+takeSecond is voor het begrijpen van het kraken van de enigma niet erg relevant.
+"""
 def takeSecond(elem):
     return elem[1]
 
+
+"""
+
+"""
 def loop(end_list, msg, ciph, c1, c2, c3, start_pos):
     if len(end_list) == 12:
         for i in end_list[0]:
@@ -459,6 +478,11 @@ def loop(end_list, msg, ciph, c1, c2, c3, start_pos):
     if len(end_list) <= 3:
         print("The message is too short, we cannot decipher this", len(end_list))
 
+
+
+"""
+
+"""
 def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
     for c1 in range(v1, v2):
         for c2 in range(26):
@@ -501,7 +525,15 @@ def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
                 loop(end_list, msg, ciph, start_pos[0],start_pos[1],start_pos[2], start_pos)
         print("Done")
 
+
+"""
+
+"""
 def Crack(msg, ciph):
+    """
+    Het onderstaande blok code zoekt in de orginele tekst en het versleutelde stukje code uit welke letters het vaakst voorkomen,
+    per letter wordt in een lijst gezet welke versleuteling daarbij hoort
+    """
     msg = msg.upper()
     ciph = ciph.upper()
     msgciph = msg + ciph
@@ -514,7 +546,6 @@ def Crack(msg, ciph):
         var = msgciph.count(i)
         if var > 0:
             countdict[i] = var
-
     countlist = [i for i in countdict.items()]
     countlist.sort(key=takeSecond, reverse=True)
     final_list = []
@@ -531,7 +562,7 @@ def Crack(msg, ciph):
     for i in final_list[0]:
         checklist.append(i)
     final_list.remove(final_list[0])
-
+    print(checklist)
     for i in final_list:
         temp_list = []
         for j in i:
@@ -540,7 +571,11 @@ def Crack(msg, ciph):
                 temp_list.append(j)
         if temp_list:
             msgciphlist.append(temp_list)
+        print(temp_list) #vw
 
+    """
+    26x26x26 matrix = sneller enigma_list[rotorpos 1][rotorpos 2][rotorpos 3][0 t/m 25 voor elke letter alfabet]
+    """
     enigma_list = []
     for i in range(26):
         temp2_list = []
@@ -564,7 +599,9 @@ def Crack(msg, ciph):
             var = enigmaOne(l, rotorI, rotorII, rotorIII, reflectorB, ii, jj, kk, emptydict)
             enigma_list[ii][jj][kk].append(var)
 
+    """
 
+    """
     savedlist = []
     toplist = []
     counterdict = {i : 0 for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
@@ -614,13 +651,11 @@ def Crack(msg, ciph):
     process8.start()
     process9.start()
 
-
+#=====================================================================================================================
 if __name__ == "__main__":
-    Crack("INEZVANWORKUM", enigma("INEZVANWORKUM", rotorI, rotorII, rotorIII, reflectorB, 1, 10, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
+    #Crack("WETTERBERICHT", enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 9, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
     """
-    Hello Jpe gatalkjtlkasjdflkajsdflkjasf
-    sdafl;kasdfkljaslkdfj
-    alksdjflkasjdflaksdfj
-    asldkfjalsdkfjasdf
-
+    De regel hieronder zorgt ervoor dat het programma de mogelijke rotorinstellingen en schakelbordinstellingen print waarvoor
+    het oorspronkelijke bericht ("WETTERBERICHT" in dit voorbeeld) wordt versleuteld als het stukje testcode ("GGNGONFXCVZLX" in dit voorbeeld).
     """
+    Crack("WETTERBERICHT", "GGNGONFXCVZLX")
