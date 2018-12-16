@@ -653,13 +653,11 @@ def Crack(msg, ciph):
 
 #=====================================================================================================================
 if __name__ == "__main__":
-<<<<<<< HEAD
     Crack("INEZVANWORKUM", enigma("INEZVANWORKUM", rotorI, rotorII, rotorIII, reflectorB, 1, 10, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
-=======
+
     #Crack("WETTERBERICHT", enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 9, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
     """
     De regel hieronder zorgt ervoor dat het programma de mogelijke rotorinstellingen en schakelbordinstellingen print waarvoor
     het oorspronkelijke bericht ("WETTERBERICHT" in dit voorbeeld) wordt versleuteld als het stukje testcode ("GGNGONFXCVZLX" in dit voorbeeld).
     """
     Crack("WETTERBERICHT", "GGNGONFXCVZLX")
->>>>>>> 5dece1792d4636ae1255a22b2006b0fffec8fc41
