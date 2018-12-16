@@ -96,11 +96,14 @@ reflectorC = ReflectorClass([alphabet_dict[i] for i in "FVPJIAOYEDRZXWGCTKUQSBNM
 #na de streep begint het cracking gedeelte
 #======================================================================================================================================
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+listname = ['AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CD', 'CE', 'CF', 'CG', 'CH', 'CI', 'CJ', 'CK', 'CL', 'CM', 'CN', 'CO', 'CP', 'CQ', 'CR', 'CS', 'CT', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DF', 'DG', 'DH', 'DI', 'DJ', 'DK', 'DL', 'DM', 'DN', 'DO', 'DP', 'DQ', 'DR', 'DS', 'DT', 'DU', 'DV', 'DW', 'DX', 'DY', 'DZ', 'EF', 'EG', 'EH', 'EI', 'EJ', 'EK', 'EL', 'EM', 'EN', 'EO', 'EP', 'EQ', 'ER', 'ES', 'ET', 'EU', 'EV', 'EW', 'EX', 'EY', 'EZ', 'FG', 'FH', 'FI', 'FJ', 'FK', 'FL', 'FM', 'FN', 'FO', 'FP', 'FQ', 'FR', 'FS', 'FT', 'FU', 'FV', 'FW', 'FX', 'FY', 'FZ', 'GH', 'GI', 'GJ', 'GK', 'GL', 'GM', 'GN', 'GO', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GV', 'GW', 'GX', 'GY', 'GZ', 'HI', 'HJ', 'HK', 'HL', 'HM', 'HN', 'HO', 'HP', 'HQ', 'HR', 'HS', 'HT', 'HU', 'HV', 'HW', 'HX', 'HY', 'HZ', 'IJ', 'IK', 'IL', 'IM', 'IN', 'IO', 'IP', 'IQ', 'IR', 'IS', 'IT', 'IU', 'IV', 'IW', 'IX', 'IY', 'IZ', 'JK', 'JL', 'JM', 'JN', 'JO', 'JP', 'JQ', 'JR', 'JS', 'JT', 'JU', 'JV', 'JW', 'JX', 'JY', 'JZ', 'KL', 'KM', 'KN', 'KO', 'KP', 'KQ', 'KR', 'KS', 'KT', 'KU', 'KV', 'KW', 'KX', 'KY', 'KZ', 'LM', 'LN', 'LO', 'LP', 'LQ', 'LR', 'LS', 'LT', 'LU', 'LV', 'LW', 'LX', 'LY', 'LZ', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NO', 'NP', 'NQ', 'NR', 'NS', 'NT', 'NU', 'NV', 'NW', 'NX', 'NY', 'NZ', 'OP', 'OQ', 'OR', 'OS', 'OT', 'OU', 'OV', 'OW', 'OX', 'OY', 'OZ', 'PQ', 'PR', 'PS', 'PT', 'PU', 'PV', 'PW', 'PX', 'PY', 'PZ', 'QR', 'QS', 'QT', 'QU', 'QV', 'QW', 'QX', 'QY', 'QZ', 'RS', 'RT', 'RU', 'RV', 'RW', 'RX', 'RY', 'RZ', 'ST', 'SU', 'SV', 'SW', 'SX', 'SY', 'SZ', 'TU', 'TV', 'TW', 'TX', 'TY', 'TZ', 'UV', 'UW', 'UX', 'UY', 'UZ', 'VW', 'VX', 'VY', 'VZ', 'WX', 'WY', 'WZ', 'XY', 'XZ', 'YZ']
 def cracking_enigma(code, origineel):
+    accept_list = listname
     foutlijst = []
+    foutlijst_enkel = []
     for i in alphabet:
         #eerste letter
+        # print(i)
         first_list = []
         plugdiction = {}
 
@@ -111,8 +114,8 @@ def cracking_enigma(code, origineel):
         #print(first_list)
         plugdiction = {first_guess[0]:first_guess[1], first_guess[1]:first_guess[0],
                        first_resultpair[0]:first_resultpair[1], first_resultpair[1]:first_resultpair[0]}
-        print("First guess + result:")
-        print(plugdiction)
+        # print("First guess + result:")
+        # print(plugdiction)
 
 
         if code[1] in plugdiction: #tweede letter
@@ -124,15 +127,19 @@ def cracking_enigma(code, origineel):
                 foutlijst.append(first_resultpair)
                 foutlijst.append(first_guess)
                 print(foutlijst)
+                for i in foutlijst:
+                    if i in accept_list:
+                        accept_list.remove(i)
+
+                accept_list = accept_list
+                print(accept_list)
             else:
-                print(second_resultpair)
-                print("wel_code[1]: plug + second result")
+                #print(second_resultpair)
+                #print("wel_code[1]: plug + second result")
                 plugdiction[second_resultpair[0]] = second_resultpair[1]
                 plugdiction[second_resultpair[1]] = second_resultpair[0]
 
-                print(plugdiction)
-
-
+                #print(plugdiction)
 
                 if code[2] in plugdiction: #derde letter
                     #print("JA")
@@ -142,22 +149,29 @@ def cracking_enigma(code, origineel):
                         foutlijst.append(second_resultpair)
                         foutlijst.append(first_resultpair)
                         foutlijst.append(first_guess)
-                        foutlijst.append(third_guess)
+                        foutlijst.append(third_resultpair)
                         print(foutlijst)
+                        for i in foutlijst:
+                            if i in accept_list:
+                                accept_list.remove(i)
+
+                        accept_list = accept_list
+                        print(accept_list)
                         #print("AY")
 
                     else:
-                        #print("NAY")
-                        print(third_resultpair)
-                        print("wel_code[1] > wel_code[2]: plug + third result:")
+
+                        #print(third_resultpair)
+                        #print("wel_code[1] > wel_code[2]: plug + third result:")
                         plugdiction[third_resultpair[0]] = third_resultpair[1]
                         plugdiction[third_resultpair[1]] = third_resultpair[0]
 
-                        print(plugdiction)
+                        #print(plugdiction)
                         #..................................
                 else: #code[2] niet in plug
-                    print("wel_code[1] > niet_code[2]")
+                    #print("wel_code[1] > niet_code[2]")
                     for x in alphabet:
+                        #print(x)
                         plugdiction = {first_guess[0]:first_guess[1], first_guess[1]:first_guess[0],
                                        first_resultpair[0]:first_resultpair[1], first_resultpair[1]:first_resultpair[0]}
                         second_guess = code[1] + x
@@ -169,14 +183,42 @@ def cracking_enigma(code, origineel):
                         plugdiction[second_resultpair[1]] = second_resultpair[0]
                         plugdiction[second_guess[0]] = second_guess[1]
                         plugdiction[second_guess[1]] = second_guess[0]
-                        print("Plug + second guess en result")
-                        print(plugdiction)
+                        #print("wel_code[1] > niet_code[2]: Plug + second guess en result")
+                        #print(plugdiction)
+                        #print(second_guess)
                         #................
+                        if code[2] in plugdiction: #derde letter
+                            #print("JA")
+                            third_resultpair = enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) + origineel[2]
+                            if enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) in plugdiction:
+                                print("fout: wel_code[1] > niet_code[2]")
+                                foutlijst.append(second_resultpair)
+                                foutlijst.append(first_resultpair)
+                                foutlijst.append(first_guess)
+                                foutlijst.append(third_resultpair)
+                                print(foutlijst)
+                                #print("AY")
+                                for i in foutlijst:
+                                    if i in accept_list:
+                                        accept_list.remove(i)
 
+                                accept_list = accept_list
+                                print(accept_list)
+                            else:
+
+                                #print(third_resultpair)
+                                #print("wel_code[1] > niet_code[2]: plug + third result:")
+                                plugdiction[third_resultpair[0]] = third_resultpair[1]
+                                plugdiction[third_resultpair[1]] = third_resultpair[0]
+
+                                #print(plugdiction)
+                                #..................................
+                        else:
+                            print("meh")
 
         else: #tweede letter, code[1] niet in plug
             #print("NEE")
-            print("niet_code[1]:")
+            #print("niet_code[1]:")
             for x in alphabet:
                 plugdiction = {first_guess[0]:first_guess[1], first_guess[1]:first_guess[0],
                                first_resultpair[0]:first_resultpair[1], first_resultpair[1]:first_resultpair[0]}
@@ -189,8 +231,97 @@ def cracking_enigma(code, origineel):
                 plugdiction[second_resultpair[1]] = second_resultpair[0]
                 plugdiction[second_guess[0]] = second_guess[1]
                 plugdiction[second_guess[1]] = second_guess[0]
-                print("Plug + second guess en result")
-                print(plugdiction)
+                #print("Plug + second guess en result")
+                #print(plugdiction)
+
+                if code[2] in plugdiction: #derde letter
+                    #print("JA")
+                    third_resultpair = enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) + origineel[2]
+                    if enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) in plugdiction:
+                        print("fout:niet_code[1] > wel_code[2]")
+                        foutlijst.append(second_resultpair)
+                        foutlijst.append(first_resultpair)
+                        foutlijst.append(first_guess)
+                        foutlijst.append(third_resultpair)
+                        print(foutlijst)
+                        #print("AY")
+                        for i in foutlijst:
+                            if i in accept_list:
+                                accept_list.remove(i)
+
+                        accept_list = accept_list
+                        print(accept_list)
+                    else:
+                        #print("NAY")
+                        #print(third_resultpair)
+                        #print("niet_code[1] > wel_code[2]: plug + third result:")
+                        plugdiction[third_resultpair[0]] = third_resultpair[1]
+                        plugdiction[third_resultpair[1]] = third_resultpair[0]
+
+                        #print(plugdiction)
+                        #..................................
+                else: #code[2] niet in plug
+                    #print("niet_code[1] > niet_code[2]")
+                    for x in alphabet:
+                        #print(x)
+                        plugdiction = {first_guess[0]:first_guess[1], first_guess[1]:first_guess[0],
+                                       first_resultpair[0]:first_resultpair[1], first_resultpair[1]:first_resultpair[0]}
+                        second_guess = code[1] + x
+                        second_resultpair = enigma(second_guess[1], rotorI, rotorII, rotorIII, reflectorB, 1, 0, 0, plugdiction) + origineel[1]
+                        first_list.append(second_guess)
+                        first_list.append(second_resultpair)
+                        #print(first_list)
+                        plugdiction[second_resultpair[0]] = second_resultpair[1]
+                        plugdiction[second_resultpair[1]] = second_resultpair[0]
+                        plugdiction[second_guess[0]] = second_guess[1]
+                        plugdiction[second_guess[1]] = second_guess[0]
+                        #print("niet_code[1] > niet_code[2]: Plug + second guess en result")
+                        #print(plugdiction)
+                        #print(second_guess)
+                        #................
+                        if code[2] in plugdiction: #derde letter
+                            #print("JA")
+                            third_resultpair = enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) + origineel[2]
+                            if enigma(code[2], rotorI, rotorII, rotorIII, reflectorB, 2, 0, 0, plugdiction) in plugdiction:
+                                print("fout: niet_code[1] > niet_code[2]")
+                                foutlijst.append(second_resultpair)
+                                foutlijst.append(first_resultpair)
+                                foutlijst.append(first_guess)
+                                foutlijst.append(third_resultpair)
+                                print(foutlijst)
+                                #print("AY")
+                                for i in foutlijst:
+                                    if i in accept_list:
+                                        accept_list.remove(i)
+
+                                accept_list = accept_list
+                                print(accept_list)
+                            else:
+                                #print("NAY")
+                                #print(third_resultpair)
+                                #print("wel_code[1] > niet_code[2]: plug + third result:")
+                                plugdiction[third_resultpair[0]] = third_resultpair[1]
+                                plugdiction[third_resultpair[1]] = third_resultpair[0]
+
+                                #print(plugdiction)
+                                #..................................
+                        else:
+                            print("meh")
 
 
+        print(foutlijst)
+        for i in foutlijst:
+            if i not in foutlijst_enkel:
+                foutlijst_enkel.append(i)
+        print("F enkel:")
+        print(foutlijst_enkel)
+        for x in foutlijst_enkel:
+            for i in accept_list:
+                if x==i:
+                    accept_list.remove(i)
+                elif x[::-1]==i:
+                    accept_list.remove(i)
+        print("accept_list: ")
+        print(len(accept_list))
+        print(accept_list)
 print(cracking_enigma("MPACLUWTFAUPD" ,"WETTERBERICHT"))
