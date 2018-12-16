@@ -624,10 +624,3 @@ def Crack(msg, ciph):
 
 if __name__ == "__main__":
     Crack("INEZVANWORKUM", enigma("INEZVANWORKUM", rotorI, rotorII, rotorIII, reflectorB, 1, 10, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
-    """
-    Hello Jpe gatalkjtlkasjdflkajsdflkjasf
-    sdafl;kasdfkljaslkdfj
-    alksdjflkasjdflaksdfj
-    asldkfjalsdkfjasdf
-
-    """
