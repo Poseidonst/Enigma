@@ -492,6 +492,7 @@ def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
                 for i in range(len(toplist)):
                     temp_list = []
                     for j in range(len(toplist[i])):
+
                         var = toplist[i][j][1]
                         var1, var2, var3 = Rotator(start_pos[0], start_pos[1], start_pos[2], var)
                         temp_list.append([var1, var2, var3])
@@ -522,17 +523,14 @@ def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
                         if bool:
                             templist2.append(templist)
                     end_list.append(templist2)
+
                 loop(end_list, msg, ciph, start_pos[0],start_pos[1],start_pos[2], start_pos)
         print("Done")
 
 
-"""
-
-"""
 def Crack(msg, ciph):
     """
-    Het onderstaande blok code zoekt in de orginele tekst en het versleutelde stukje code uit welke letters het vaakst voorkomen,
-    per letter wordt in een lijst gezet welke versleuteling daarbij hoort
+    In het stuk code hieronder worden het originele bericht en het versleutelde bericht achter elkaar geplakt en wordt gekeken per letter hoevaak deze erin voorkomt.
     """
     msg = msg.upper()
     ciph = ciph.upper()
@@ -546,6 +544,7 @@ def Crack(msg, ciph):
         var = msgciph.count(i)
         if var > 0:
             countdict[i] = var
+    print(countdict) #vw
     countlist = [i for i in countdict.items()]
     countlist.sort(key=takeSecond, reverse=True)
     final_list = []
@@ -556,13 +555,18 @@ def Crack(msg, ciph):
                 temp_list.append(j)
         final_list.append(temp_list)
 
+    """
+    Het programma maakt een lijst met alle versleutelingen. Als het originele stukje tekst bijvoorbeeld "HOI" is en de versleutelde code "BFM"
+    zouden de versleutelingen HB, OF en IM zijn. De lijst met versleutelingen is georganiseerd op hoevaak letters in de code voorkomen,
+    als R het vaakst in de code voorkomt zal de lijst beginnen met alle versleutelingen waarin een R voorkomt, vervolgens doe je de letter die
+    op R na het vaakst voorkomt, etc.
+    """
     msgciphlist = []
     msgciphlist.append(final_list[0])
     checklist = []
     for i in final_list[0]:
         checklist.append(i)
     final_list.remove(final_list[0])
-    print(checklist)
     for i in final_list:
         temp_list = []
         for j in i:
@@ -571,7 +575,7 @@ def Crack(msg, ciph):
                 temp_list.append(j)
         if temp_list:
             msgciphlist.append(temp_list)
-        print(temp_list) #vw
+
 
     """
     26x26x26 matrix = sneller enigma_list[rotorpos 1][rotorpos 2][rotorpos 3][0 t/m 25 voor elke letter alfabet]
@@ -600,7 +604,7 @@ def Crack(msg, ciph):
             enigma_list[ii][jj][kk].append(var)
 
     """
-
+    Het volgende stuk code maakt voor de versleuteling van 1 letter een lijst(?) .............
     """
     savedlist = []
     toplist = []
@@ -610,12 +614,18 @@ def Crack(msg, ciph):
     masterlist = []
     for q in range(len(countlist)):
         masterlist.append(countlist[q][0])
+        print(masterlist) #vw
 
     cnt = -1
     for q in range(length):
         test_list = msgciphlist[q]
+        print(test_list) #vw
         bool = True
         test_list = msgciphlist[q]
+
+        print(test_list) #vw
+        print(" ") #vw
+        print(masterlist)
         while bool:
             cnt += 1
             if len(test_list) > 1:
@@ -631,6 +641,7 @@ def Crack(msg, ciph):
                 i[0] = i[0][0]
         toplist.append(test_list)
         savedlist.append(masterlist[cnt])
+
 
     process1 = multiprocessing.Process(target=CrackLoop, args=(msg.upper(), ciph.upper(), 0, 3, toplist, savedlist, enigma_list))
     process2 = multiprocessing.Process(target=CrackLoop, args=(msg.upper(), ciph.upper(), 3, 6, toplist, savedlist, enigma_list))
@@ -653,8 +664,6 @@ def Crack(msg, ciph):
 
 #=====================================================================================================================
 if __name__ == "__main__":
-    Crack("INEZVANWORKUM", enigma("INEZVANWORKUM", rotorI, rotorII, rotorIII, reflectorB, 1, 10, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
-
     #Crack("WETTERBERICHT", enigma("WETTERBERICHT", rotorI, rotorII, rotorIII, reflectorB, 1, 9, 10, DictionConvert(["AB","CD","EF","GH","IJ","KL","MN","OP","QR","ST","UV","WX","YZ"])))
     """
     De regel hieronder zorgt ervoor dat het programma de mogelijke rotorinstellingen en schakelbordinstellingen print waarvoor
