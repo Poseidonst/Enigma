@@ -481,7 +481,8 @@ def loop(end_list, msg, ciph, c1, c2, c3, start_pos):
 
 
 """
-
+Crackloop gebruikt via de functie Loop() verschillende loops om te onderzoeken of er bepaalde schakelbord schakelingen mogelijk zijn
+zodat de text zal worden gecodeerd als de guess (meestal "WETTERBERICHT")
 """
 def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
     for c1 in range(v1, v2):
@@ -530,7 +531,8 @@ def CrackLoop(msg, ciph, v1, v2, toplist, savedlist, enigma_list):
 
 def Crack(msg, ciph):
     """
-    In het stuk code hieronder worden het originele bericht en het versleutelde bericht achter elkaar geplakt en wordt gekeken per letter hoevaak deze erin voorkomt.
+    In het stuk code hieronder worden het originele bericht en het versleutelde bericht achter elkaar geplakt 
+    en wordt gekeken per letter hoevaak deze erin voorkomt.
     """
     msg = msg.upper()
     ciph = ciph.upper()
@@ -578,7 +580,8 @@ def Crack(msg, ciph):
 
 
     """
-    26x26x26 matrix = sneller enigma_list[rotorpos 1][rotorpos 2][rotorpos 3][0 t/m 25 voor elke letter alfabet]
+    Maakt 26x26x26 matrix (enigma_list) met door de enigma versleutelde letters A t/m Z. enigma_list[1][0][10] zal vervolgens
+    die lijst geven voor rotorinstelling 1, 0, 10.
     """
     enigma_list = []
     for i in range(26):
@@ -604,7 +607,8 @@ def Crack(msg, ciph):
             enigma_list[ii][jj][kk].append(var)
 
     """
-    Het volgende stuk code maakt voor de versleuteling van 1 letter een lijst(?) .............
+    Het volgende stuk maakt een lijst waarin per letter (bijvoorbeeld de R) de letter die de enigma machine als output zou geven
+    wordt gekoppeld aan de voorgaande letters in deze lijst.
     """
     savedlist = []
     toplist = []
@@ -641,7 +645,11 @@ def Crack(msg, ciph):
                 i[0] = i[0][0]
         toplist.append(test_list)
         savedlist.append(masterlist[cnt])
-
+    
+    """
+    Het volgende stuk start verschillende processen die tegelijkertijd verschillende rotorposities zullen langsgaan met een gegeven lijst
+    Hiermee wordt uiteindelijk gekeken of bepaalde instellingen mogelijk zijn.
+    """
 
     process1 = multiprocessing.Process(target=CrackLoop, args=(msg.upper(), ciph.upper(), 0, 3, toplist, savedlist, enigma_list))
     process2 = multiprocessing.Process(target=CrackLoop, args=(msg.upper(), ciph.upper(), 3, 6, toplist, savedlist, enigma_list))
